@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		62FE0B3D1A7412400087CCC2 /* Questions in Resources */ = {isa = PBXBuildFile; fileRef = 62FE0B3C1A7412400087CCC2 /* Questions */; };
 		C393E34F1A6B5FE800329D66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C393E34E1A6B5FE800329D66 /* AppDelegate.swift */; };
 		C393E3511A6B5FE800329D66 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C393E3501A6B5FE800329D66 /* TableViewController.swift */; };
 		C393E3541A6B5FE800329D66 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C393E3521A6B5FE800329D66 /* Main.storyboard */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		62FE0B3C1A7412400087CCC2 /* Questions */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Questions; sourceTree = "<group>"; };
 		C393E3491A6B5FE800329D66 /* Dictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dictionary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C393E34D1A6B5FE800329D66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C393E34E1A6B5FE800329D66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 		C393E3401A6B5FE800329D66 = {
 			isa = PBXGroup;
 			children = (
+				62FE0B3C1A7412400087CCC2 /* Questions */,
 				C393E34B1A6B5FE800329D66 /* Dictionary */,
 				C393E3611A6B5FE800329D66 /* DictionaryTests */,
 				C393E34A1A6B5FE800329D66 /* Products */,
@@ -253,6 +256,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62FE0B3D1A7412400087CCC2 /* Questions in Resources */,
 				C393E37C1A6B69E500329D66 /* letter.png in Resources */,
 				C393E3541A6B5FE800329D66 /* Main.storyboard in Resources */,
 				C393E37A1A6B69E500329D66 /* dictionary@2x.png in Resources */,

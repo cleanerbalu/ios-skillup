@@ -100,11 +100,12 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="YYY-Dt-Cs7"/>
                                     <barButtonItem style="plain" id="PU9-5O-8VI">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" id="HqC-Cl-89D">
-                                            <rect key="frame" x="16" y="6.5" width="266" height="31"/>
+                                            <rect key="frame" x="167" y="7" width="266" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="Dictionary"/>
                                                 <segment title="Alphabet"/>
+                                                <segment title="Quiz"/>
                                             </segments>
                                             <connections>
                                                 <action selector="onSegmentedControl:" destination="80e-Pw-n13" eventType="valueChanged" id="PeB-Gf-enM"/>

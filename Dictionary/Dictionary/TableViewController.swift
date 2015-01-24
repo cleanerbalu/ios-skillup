@@ -19,6 +19,8 @@ class TableViewController: UIViewController, UITableViewDataSource, UISearchBarD
     private lazy var wordsReference = WordsReference()
     private var filteredWords: [WordsReference.Word]?
     
+    private var myView: UIView?
+    
     private var isAlphabetMode: Bool = false {
         didSet (newValue) {
             if newValue != isAlphabetMode {
@@ -49,7 +51,15 @@ class TableViewController: UIViewController, UITableViewDataSource, UISearchBarD
                         self.toolBar!.transform = CGAffineTransformMakeScale(0.5, 0.5)
                     }),
                     completion: { finished in
-                        self.toolBar!.transform = CGAffineTransformMakeScale(1, 1)
+                        
+                        UIView.animateWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.3,
+                            initialSpringVelocity: 3.0, options: UIViewAnimationOptions.CurveEaseInOut,
+                            animations: ({
+                                self.toolBar!.transform = CGAffineTransformMakeScale(1, 1)
+                            }),
+                            completion: nil)
+
+                        //self.toolBar!.transform = CGAffineTransformMakeScale(1, 1)
                 })
             }
         }
@@ -145,13 +155,83 @@ class TableViewController: UIViewController, UITableViewDataSource, UISearchBarD
         }
     }
     
+    func quizButton(){
+    
+        if myView == nil {
+            let view = UIView(frame:CGRect(x:10.0,y:10.0,width:350.0,height:150.0))
+            view.center = CGPointMake(self.view.bounds.width/2, self.view.bounds.height/2)
+            view.backgroundColor=UIColor.yellowColor()
+        
+            let button = UIButton.buttonWithType(.System) as UIButton
+            button.frame = CGRectMake(10, 100, 70, 35)
+            button.backgroundColor = UIColor.greenColor()
+            button.setTitle("B1", forState: UIControlState.Normal)
+            button.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)
+            view.addSubview(button)
+        
+            let button_2 = UIButton.buttonWithType(.System) as UIButton
+            button_2.frame = CGRectMake(270, 100, 70, 35)
+            button_2.backgroundColor = UIColor.greenColor()
+            button_2.setTitle("B1", forState: UIControlState.Normal)
+            button_2.addTarget(self, action: "button_2Action:", forControlEvents: UIControlEvents.TouchUpInside)
+            view.addSubview(button_2)
+            
+            myView = view
+        }
+        self.view.addSubview(myView!)
+    }
+    
+    func buttonAction(sender:UIButton!)
+    {
+/*
+        let txtLayer = CATextLayer()
+        txtLayer.string = "some text"
+        txtLayer.opacity = 0.0
+        txtLayer.opaque = false
+        txtLayer.foregroundColor = UIColor.redColor().CGColor
+        self.myView?.layer.addSublayer(txtLayer)
+  */
+        let txtLabel = UILabel()
+        txtLabel.opaque=false
+        txtLabel.alpha=1.0
+        txtLabel.textColor=UIColor.redColor()
+        txtLabel.frame =  CGRectMake(10, 10, 70, 35)
+       
+        self.myView?.addSubview(txtLabel)
+        self.myView?.layoutIfNeeded()
+        
+        UIView.animateWithDuration(4.0,
+            animations: {
+                //txtLayer.opacity = 1.0
+                txtLabel.alpha = 1.0
+            },
+            completion: { finished in
+                self.myView?.removeFromSuperview()
+                return
+            }
+        )
+        
+    }
+    
+    func button_2Action(sender:UIButton!)
+    {
+        myView?.removeFromSuperview()
+    }
+    
     //MARK: Actions
     @IBAction func onSegmentedControl(sender: AnyObject) {
-        
-        if let segmentedControl = sender as? UISegmentedControl {
-            isAlphabetMode = segmentedControl.selectedSegmentIndex == 1
+        let segmentedControl = sender as? UISegmentedControl
+        switch segmentedControl!.selectedSegmentIndex {
+        case 0:
+            isAlphabetMode = false
+        case 1:
+            isAlphabetMode = true
+        case 3:
+            quizButton()
+            //do quiz
+        default:
+            quizButton()
         }
-        
         
     }
     
