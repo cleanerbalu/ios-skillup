@@ -104,7 +104,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UISearchBarD
         else {
             let word = filteredWords != nil ? filteredWords![indexPath.row] : wordsReference.words[wordsReference.wordsIndex[indexPath.row]]
             var translations = ", ".join(word!.translations)
-            cell.textLabel?.text = " - ".join([word!.word, translations])
+            cell.textLabel.text = " - ".join([word!.word, translations])
         }
         
         return cell
@@ -192,11 +192,13 @@ class TableViewController: UIViewController, UITableViewDataSource, UISearchBarD
         self.myView?.layer.addSublayer(txtLayer)
   */
         let txtLabel = UILabel()
+        txtLabel.text = "TEXT"
         txtLabel.opaque=false
         txtLabel.alpha=1.0
         txtLabel.textColor=UIColor.redColor()
+//        txtLabel.sizeToFit()
         txtLabel.frame =  CGRectMake(10, 10, 70, 35)
-       
+        
         self.myView?.addSubview(txtLabel)
         self.myView?.layoutIfNeeded()
         
