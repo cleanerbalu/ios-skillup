@@ -104,7 +104,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UISearchBarD
         else {
             let word = filteredWords != nil ? filteredWords![indexPath.row] : wordsReference.words[wordsReference.wordsIndex[indexPath.row]]
             var translations = ", ".join(word!.translations)
-            cell.textLabel.text = " - ".join([word!.word, translations])
+            cell.textLabel?.text = " - ".join([word!.word, translations])
         }
         
         return cell
@@ -194,7 +194,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UISearchBarD
         let txtLabel = UILabel()
         txtLabel.text = "TEXT"
         txtLabel.opaque=false
-        txtLabel.alpha=1.0
+        txtLabel.alpha=0.0
         txtLabel.textColor=UIColor.redColor()
 //        txtLabel.sizeToFit()
         txtLabel.frame =  CGRectMake(10, 10, 70, 35)
@@ -208,6 +208,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UISearchBarD
                 txtLabel.alpha = 1.0
             },
             completion: { finished in
+                txtLabel.alpha=0.0
                 self.myView?.removeFromSuperview()
                 return
             }
@@ -228,9 +229,16 @@ class TableViewController: UIViewController, UITableViewDataSource, UISearchBarD
             isAlphabetMode = false
         case 1:
             isAlphabetMode = true
-        case 3:
+        case 2:
             quizButton()
             //do quiz
+        case 3:
+            if self.navigationController == nil {
+                print("********** NIL **************")
+            }
+            let nxtView = self.storyboard?.instantiateViewControllerWithIdentifier("collView") as UIViewController
+            self.navigationController?.pushViewController(nxtView, animated: true)
+            
         default:
             quizButton()
         }
@@ -280,5 +288,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UISearchBarD
 */
  
     }
+    
+    
 }
 

@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UICollectionViewController {
-    var images = Array<UIImageView>()
+    var images = Array<UIImage>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,24 +25,16 @@ class ViewController: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier("imageCell", forIndexPath: indexPath) as ImageCellCollectionViewCell
         
-        cell.vwimage =  images[indexPath.row]
+        cell.vwimage.image =  images[indexPath.row]
         return cell
     }
     
     func loadImages() {
         for var i = 0; i < 19; i++ {
             let image = UIImage(named: "sa\(i).jpg")
-            let imgView =   UIImageView()
-            imgView.image = image
-            images.append(imgView)
+            images.append(image!)
         }
     }
-    
- /*   override func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath)
-    {
-        super.
-        //let myimage =  images[indexPath.row] as ImageCellCollectionViewCell
-        //myimage.myDraw()
-    }*/
-}
+  
+  }
 

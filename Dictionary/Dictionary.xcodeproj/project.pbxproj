@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		62082D9D1A768166003A9CDC /* MyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62082D9C1A768166003A9CDC /* MyCollectionViewController.swift */; };
 		62FE0B3D1A7412400087CCC2 /* Questions in Resources */ = {isa = PBXBuildFile; fileRef = 62FE0B3C1A7412400087CCC2 /* Questions */; };
 		C393E34F1A6B5FE800329D66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C393E34E1A6B5FE800329D66 /* AppDelegate.swift */; };
 		C393E3511A6B5FE800329D66 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C393E3501A6B5FE800329D66 /* TableViewController.swift */; };
@@ -22,7 +23,6 @@
 		C393E3821A6B6CB400329D66 /* start@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C393E37F1A6B6CB400329D66 /* start@2x.png */; };
 		C393E3831A6B6CB400329D66 /* start@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C393E3801A6B6CB400329D66 /* start@3x.png */; };
 		C393E3851A6B6E2700329D66 /* start.png in Resources */ = {isa = PBXBuildFile; fileRef = C393E3841A6B6E2700329D66 /* start.png */; };
-		C393E3871A6B71FB00329D66 /* DictionaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C393E3861A6B71FB00329D66 /* DictionaryTableViewController.swift */; };
 		C393E3E81A6B875B00329D66 /* Alphabet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C393E3E71A6B875B00329D66 /* Alphabet.swift */; };
 		C393E3EA1A6B877900329D66 /* WordsReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = C393E3E91A6B877900329D66 /* WordsReference.swift */; };
 		C393E3F01A6B8A0600329D66 /* Letters.json in Resources */ = {isa = PBXBuildFile; fileRef = C393E3EE1A6B8A0600329D66 /* Letters.json */; };
@@ -42,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		62082D9C1A768166003A9CDC /* MyCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCollectionViewController.swift; sourceTree = "<group>"; };
 		62FE0B3C1A7412400087CCC2 /* Questions */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Questions; sourceTree = "<group>"; };
 		C393E3491A6B5FE800329D66 /* Dictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dictionary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C393E34D1A6B5FE800329D66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -61,7 +62,6 @@
 		C393E37F1A6B6CB400329D66 /* start@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "start@2x.png"; sourceTree = "<group>"; };
 		C393E3801A6B6CB400329D66 /* start@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "start@3x.png"; sourceTree = "<group>"; };
 		C393E3841A6B6E2700329D66 /* start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start.png; sourceTree = "<group>"; };
-		C393E3861A6B71FB00329D66 /* DictionaryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryTableViewController.swift; sourceTree = "<group>"; };
 		C393E3E71A6B875B00329D66 /* Alphabet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alphabet.swift; sourceTree = "<group>"; };
 		C393E3E91A6B877900329D66 /* WordsReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsReference.swift; sourceTree = "<group>"; };
 		C393E3EE1A6B8A0600329D66 /* Letters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Letters.json; sourceTree = "<group>"; };
@@ -114,12 +114,12 @@
 				C393E34E1A6B5FE800329D66 /* AppDelegate.swift */,
 				C393E3501A6B5FE800329D66 /* TableViewController.swift */,
 				C393E3F21A6B8D9100329D66 /* AlphabetCell.swift */,
+				62082D9C1A768166003A9CDC /* MyCollectionViewController.swift */,
 				C393E3521A6B5FE800329D66 /* Main.storyboard */,
 				C393E3551A6B5FE800329D66 /* Images.xcassets */,
 				C393E3571A6B5FE800329D66 /* LaunchScreen.xib */,
 				C393E3731A6B69E500329D66 /* Resources */,
 				C393E34C1A6B5FE800329D66 /* Supporting Files */,
-				C393E3861A6B71FB00329D66 /* DictionaryTableViewController.swift */,
 			);
 			path = Dictionary;
 			sourceTree = "<group>";
@@ -290,7 +290,7 @@
 			files = (
 				C393E3EA1A6B877900329D66 /* WordsReference.swift in Sources */,
 				C393E3511A6B5FE800329D66 /* TableViewController.swift in Sources */,
-				C393E3871A6B71FB00329D66 /* DictionaryTableViewController.swift in Sources */,
+				62082D9D1A768166003A9CDC /* MyCollectionViewController.swift in Sources */,
 				C393E3E81A6B875B00329D66 /* Alphabet.swift in Sources */,
 				C393E3F31A6B8D9100329D66 /* AlphabetCell.swift in Sources */,
 				C393E34F1A6B5FE800329D66 /* AppDelegate.swift in Sources */,
