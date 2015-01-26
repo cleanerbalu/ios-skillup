@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0557F31B1A76915600ECB81B /* MyViewCellWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0557F31A1A76915600ECB81B /* MyViewCellWord.swift */; };
 		62082D9D1A768166003A9CDC /* MyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62082D9C1A768166003A9CDC /* MyCollectionViewController.swift */; };
 		62FE0B3D1A7412400087CCC2 /* Questions in Resources */ = {isa = PBXBuildFile; fileRef = 62FE0B3C1A7412400087CCC2 /* Questions */; };
 		C393E34F1A6B5FE800329D66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C393E34E1A6B5FE800329D66 /* AppDelegate.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0557F31A1A76915600ECB81B /* MyViewCellWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyViewCellWord.swift; sourceTree = "<group>"; };
 		62082D9C1A768166003A9CDC /* MyCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCollectionViewController.swift; sourceTree = "<group>"; };
 		62FE0B3C1A7412400087CCC2 /* Questions */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Questions; sourceTree = "<group>"; };
 		C393E3491A6B5FE800329D66 /* Dictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dictionary.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +122,7 @@
 				C393E3571A6B5FE800329D66 /* LaunchScreen.xib */,
 				C393E3731A6B69E500329D66 /* Resources */,
 				C393E34C1A6B5FE800329D66 /* Supporting Files */,
+				0557F31A1A76915600ECB81B /* MyViewCellWord.swift */,
 			);
 			path = Dictionary;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				62082D9D1A768166003A9CDC /* MyCollectionViewController.swift in Sources */,
 				C393E3E81A6B875B00329D66 /* Alphabet.swift in Sources */,
 				C393E3F31A6B8D9100329D66 /* AlphabetCell.swift in Sources */,
+				0557F31B1A76915600ECB81B /* MyViewCellWord.swift in Sources */,
 				C393E34F1A6B5FE800329D66 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

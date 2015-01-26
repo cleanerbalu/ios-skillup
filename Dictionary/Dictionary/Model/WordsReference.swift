@@ -26,7 +26,11 @@ class WordsReference {
     
     var words: Dictionary<String, Word> { get { return _words } }
     var wordsIndex: [String] { get { return _wordsIndex } }
-    
+    subscript (index:Int) ->String{
+        get {
+            return wordsIndex[index]
+        }
+    }
     init() {
         if let path = NSBundle.mainBundle().pathForResource("Words", ofType: "json") {
             if let dict = loadDictForPath(path) {

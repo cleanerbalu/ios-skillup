@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="80e-Pw-n13">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="80e-Pw-n13">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="oar-JI-hLE">
-                                <rect key="frame" x="0.0" y="64" width="600" height="204"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="211"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" id="5oC-Xw-hR7">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -122,7 +122,7 @@
                                 </items>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </toolbar>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DEg-JA-e35">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DEg-JA-e35">
                                 <rect key="frame" x="0.0" y="262" width="600" height="294"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xPS-w1-UFC">
                                     <size key="itemSize" width="102" height="50"/>
@@ -131,22 +131,33 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="d6K-6W-LBb">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="d6K-6W-LBb" customClass="MyViewCellWord" customModule="Dictionary" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="102" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7br-6w-OgB">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7br-6w-OgB">
                                                     <rect key="frame" x="0.0" y="0.0" width="102" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="102" id="AD3-iv-9OP"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="7br-6w-OgB" firstAttribute="top" secondItem="d6K-6W-LBb" secondAttribute="top" id="3qo-7v-yvw"/>
+                                            <constraint firstAttribute="centerX" secondItem="7br-6w-OgB" secondAttribute="centerX" id="5hc-2v-d5S"/>
+                                            <constraint firstAttribute="centerY" secondItem="7br-6w-OgB" secondAttribute="centerY" id="lRD-f5-byq"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="theWord" destination="7br-6w-OgB" id="41t-B5-Wp8"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -156,8 +167,12 @@
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="oar-JI-hLE" secondAttribute="trailing" constant="-16" id="HWS-tR-ED7"/>
                             <constraint firstItem="jvr-HP-VIM" firstAttribute="top" secondItem="3A6-l0-sxJ" secondAttribute="bottom" id="HZ9-Tu-fRX"/>
+                            <constraint firstItem="DEg-JA-e35" firstAttribute="trailing" secondItem="oar-JI-hLE" secondAttribute="trailing" id="NSs-XI-Adg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="jvr-HP-VIM" secondAttribute="trailing" constant="-16" id="QOZ-BP-lkN"/>
                             <constraint firstItem="guZ-4k-IH5" firstAttribute="top" secondItem="oar-JI-hLE" secondAttribute="bottom" id="SQD-me-si4"/>
+                            <constraint firstItem="oar-JI-hLE" firstAttribute="top" secondItem="DEg-JA-e35" secondAttribute="top" constant="-198" id="Whr-ea-OPY"/>
+                            <constraint firstItem="DEg-JA-e35" firstAttribute="leading" secondItem="oar-JI-hLE" secondAttribute="leading" id="af3-Qd-qsj"/>
+                            <constraint firstItem="guZ-4k-IH5" firstAttribute="top" secondItem="DEg-JA-e35" secondAttribute="bottom" id="lkG-v8-W5u"/>
                             <constraint firstItem="jvr-HP-VIM" firstAttribute="leading" secondItem="6Xp-GF-IEo" secondAttribute="leadingMargin" constant="-16" id="nDh-cA-nJo"/>
                             <constraint firstItem="oar-JI-hLE" firstAttribute="top" secondItem="jvr-HP-VIM" secondAttribute="bottom" id="vRa-oF-4bN"/>
                             <constraint firstItem="oar-JI-hLE" firstAttribute="leading" secondItem="6Xp-GF-IEo" secondAttribute="leadingMargin" constant="-16" id="yu4-v4-Nl0"/>
