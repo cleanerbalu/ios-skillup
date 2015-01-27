@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		621856681A77B96100BF289A /* MyUICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621856671A77B96100BF289A /* MyUICollectionView.swift */; };
 		C3D741721A74FFF100302A41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D741711A74FFF100302A41 /* AppDelegate.swift */; };
 		C3D741741A74FFF100302A41 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D741731A74FFF100302A41 /* ViewController.swift */; };
 		C3D741771A74FFF100302A41 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3D741751A74FFF100302A41 /* Main.storyboard */; };
@@ -52,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		621856671A77B96100BF289A /* MyUICollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyUICollectionView.swift; path = ../MyUICollectionView.swift; sourceTree = "<group>"; };
 		C3D7416C1A74FFF100302A41 /* SimpleCollectionView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleCollectionView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3D741701A74FFF100302A41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C3D741711A74FFF100302A41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 		C3D7416E1A74FFF100302A41 /* SimpleCollectionView */ = {
 			isa = PBXGroup;
 			children = (
+				621856671A77B96100BF289A /* MyUICollectionView.swift */,
 				C3D741711A74FFF100302A41 /* AppDelegate.swift */,
 				C3D741731A74FFF100302A41 /* ViewController.swift */,
 				C3D741751A74FFF100302A41 /* Main.storyboard */,
@@ -325,6 +328,7 @@
 			files = (
 				C3D741921A75005D00302A41 /* ImageCellCollectionViewCell.swift in Sources */,
 				C3D741741A74FFF100302A41 /* ViewController.swift in Sources */,
+				621856681A77B96100BF289A /* MyUICollectionView.swift in Sources */,
 				C3D741721A74FFF100302A41 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -28,8 +28,8 @@ class StackLayout: UICollectionViewLayout {
         
         angles.removeAll()
         
-        let maxAngle = Float(M_1_PI / 3.0)
-        let minAngle = Float(-M_1_PI / 3.0)
+        let maxAngle = Float(M_1_PI / 1.0)
+        let minAngle = Float(-M_1_PI / 1.0)
         let diff = maxAngle - minAngle
         
         angles.append(0.0)
@@ -48,7 +48,12 @@ class StackLayout: UICollectionViewLayout {
             attributes.size = self.itemSize
             attributes.center = center
             //attributes.transform = CGAffineTransformMakeRotation(CGFloat(angle))
-            attributes.transform = CGAffineTransformMakeRotation(CGFloat(angle))
+            
+            let t1 = CGAffineTransformMakeRotation(CGFloat(angle))
+            let t2 = CGAffineTransformTranslate(t1,CGFloat(myrand(-100,max: 300)),CGFloat(myrand(-100,max: 300)))
+            let scaleFactor = CGFloat(myrand(0.2,max: 0.5))
+            let t3 = CGAffineTransformScale(t2, scaleFactor   ,scaleFactor)
+            attributes.transform = t1//CGAffineTransformMakeRotation(CGFloat(angle))
                                    /*CGAffineTransformScale(
                                         CGAffineTransformTranslate(
                                             CGAffineTransformMakeRotation(CGFloat(angle)),
