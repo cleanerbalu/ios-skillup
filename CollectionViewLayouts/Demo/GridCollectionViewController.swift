@@ -22,7 +22,7 @@ class GridCollectionViewController: BaseCollectionViewController {
         if segue.identifier=="goToDetail" {
             let dst = segue.destinationViewController as DetailsViewController
             dst.image = self.images[imgPos]
-            
+            dst.currentImageIndex = imgPos
         }
     }
     

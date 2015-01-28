@@ -10,17 +10,19 @@ import UIKit
 
 let reuseIdentifier = "Cell"
 
+
 class BaseCollectionViewController: UICollectionViewController {
-    lazy var images: Array<UIImage> = self.loadDataImages()
+    //lazy var images: Array<UIImage> = self.loadDataImages()
+    var  images = ImageContainer()
     var selectedIndex: Int = 0
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return self.images.count
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("imageCell", forIndexPath: indexPath) as CollectionViewCell
-        cell.image?.image = images[indexPath.row]
+        cell.image?.image = self.images[indexPath.row]
         
         return cell
     }
