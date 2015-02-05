@@ -10,15 +10,37 @@ import UIKit
 
 class ViewController: UIViewController,NSURLSessionDelegate {
     @IBOutlet var web: UIWebView?
-    
+    let kv = TestKVO()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         //https ://ht tpbin.
-        let nc = NSNotificationCenter.defaultCenter()
         
+        
+        
+        
+        let nc = NSNotificationCenter.defaultCenter()
         nc.addObserver(self,selector:"receive:",name:"test",object:nil)
         nc.postNotificationName ("test", object: nil)
+        
+        kv.addObserver(self, forKeyPath: "key", options: nil, context: nil)
+        kv.setKey("newData")
+        kv.setKey("again newData")
+        
+        
+        
+        let sett = UIUserNotificationSettings(forTypes: UIUserNotificationType.Badge, categories: nil)
+        let local = UILocalNotification()
+        local.fireDate = NSDate(timeIntervalSinceNow: 5)
+        //local.applicationIconBadgeNumber = 4
+        let myApp = UIApplication.sharedApplication()
+        myApp.registerUserNotificationSettings(sett)
+        myApp.scheduleLocalNotification(local)
+        
+        
+        
+        
+        
         
         println("I'm here")
         let urlcon = NSURLSessionConfiguration.defaultSessionConfiguration()
@@ -34,7 +56,6 @@ class ViewController: UIViewController,NSURLSessionDelegate {
                 }
         
                 if res == 0 {
-                    println(data)
                     let mime = "text/html"
             
                     self.web?.loadData(data!, MIMEType: mime, textEncodingName: "utf-8", baseURL: theURL!)
@@ -48,14 +69,16 @@ class ViewController: UIViewController,NSURLSessionDelegate {
     }
 
     func receive(data: NSNotification){
-         print("received")
+         println("received")
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    
+    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+        println((object as TestKVO).key)
+    }
 
 
 }
