@@ -15,12 +15,16 @@ class ViewController: UIViewController,NSURLSessionDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         //https ://ht tpbin.
+        let nc = NSNotificationCenter.defaultCenter()
+        
+        nc.addObserver(self,selector:"receive:",name:"test",object:nil)
+        nc.postNotificationName ("test", object: nil)
         
         println("I'm here")
         let urlcon = NSURLSessionConfiguration.defaultSessionConfiguration()
         
         let nsurl = NSURLSession(configuration: urlcon, delegate:self, delegateQueue: nil)
-        let theURL = NSURL(string:"https://googlu.com")
+        let theURL = NSURL(string:"https://google.com")
         nsurl.dataTaskWithURL(theURL!,
             completionHandler: {
                 (data: NSData!, resp: NSURLResponse!, err: NSError!) -> Void in
@@ -43,6 +47,9 @@ class ViewController: UIViewController,NSURLSessionDelegate {
  
     }
 
+    func receive(data: NSNotification){
+         print("received")
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -21,6 +21,7 @@ class DetailsViewController: UIViewController {
     
     
     override func viewDidLoad() {
+        NSNotificationCenter.add
         
         swipeRecogLeft = UISwipeGestureRecognizer(target: self, action: "swipedView:")
         swipeRecogLeft?.direction =  UISwipeGestureRecognizerDirection.Left
