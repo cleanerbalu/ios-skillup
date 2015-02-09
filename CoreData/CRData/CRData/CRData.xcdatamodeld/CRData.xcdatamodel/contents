@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="13F34" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Event">
+        <attribute name="timeStamp" optional="YES" attributeType="Date">
+            <userInfo/>
+        </attribute>
+        <relationship name="type2dict" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TypeDictionary" syncable="YES"/>
+        <userInfo/>
+    </entity>
+    <entity name="TypeDictionary" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Event" positionX="-4860" positionY="-1764" width="128" height="73"/>
+        <element name="TypeDictionary" positionX="-4709" positionY="-1660" width="128" height="58"/>
+    </elements>
+</model>
