@@ -15,10 +15,17 @@ private var managedObjectModel: NSManagedObjectModel?
 private var managedObjectContext: NSManagedObjectContext?
 private var persistentStoreCoordinator: NSPersistentStoreCoordinator?
 private var appDelegate: UIApplicationDelegate?
+private var _fetchedResultsController: NSFetchedResultsController? = nil
 
 class ModelRecipes {
+    struct recipeDataType {
+        var shortDescribtion: String? = nil
+        var preparation: String? = nil
+        var imageLocation: String? = nil
+    }
     
     init(){
+        println("modelrecipe!")
         if managedObjectContext == nil {
             /*load the model*/
             let modelURL = NSBundle.mainBundle().URLForResource("Recipe", withExtension: "momd")
@@ -50,9 +57,89 @@ class ModelRecipes {
    
             managedObjectContext = NSManagedObjectContext()
             managedObjectContext?.persistentStoreCoordinator = persistentStoreCoordinator
+            
+            println("modelrecipe init done")
         }
         
     }
+    
+    func fetch() ->[NSManagedObject]? {
+        
+        //managedObjectContext?.executeFetchRequest(<#request: NSFetchRequest#>, error: <#NSErrorPointer#>)
+        
+        let fetchReq = NSFetchRequest(entityName: "TheRecipe")
+        var error: NSError?
+        let fetchResults = managedObjectContext?.executeFetchRequest(fetchReq, error: &error ) as [NSManagedObject]?
+        if let results = fetchResults {
+            return results
+        } else {
+            println("error fetching results")
+            return nil
+        }
+    }
+    
+    
+    
+    var fetchedResultsController: NSFetchedResultsController {
+        if _fetchedResultsController != nil {
+            return _fetchedResultsController!
+        }
+        
+        let fetchRequest = NSFetchRequest()
+        // Edit the entity name as appropriate.
+        let entity = NSEntityDescription.entityForName("TheRecipe", inManagedObjectContext: managedObjectContext!)
+        fetchRequest.entity = entity
+        
+        // Set the batch size to a suitable number.
+        fetchRequest.fetchBatchSize = 20
+        
+        // Edit the sort key as appropriate.
+        let sortDescriptor = NSSortDescriptor(key: "shortDescr", ascending: false)
+        let sortDescriptors = [sortDescriptor]
+        
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        // Edit the section name key path and cache name if appropriate.
+        // nil for section name key path means "no sections".
+        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
+        //aFetchedResultsController.delegate = self
+        _fetchedResultsController = aFetchedResultsController
+        
+        var error: NSError? = nil
+        if !_fetchedResultsController!.performFetch(&error) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            //println("Unresolved error \(error), \(error.userInfo)")
+            abort()
+        }
+        
+        return _fetchedResultsController!
+    }
+    
+
+    
+    func insertNewObject(recipe: recipeDataType) {
+        let context = fetchedResultsController.managedObjectContext
+        let entity = fetchedResultsController.fetchRequest.entity!
+        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context) as NSManagedObject
+        
+        // If appropriate, configure the new managed object.
+        // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
+        newManagedObject.setValue(recipe.shortDescribtion, forKey: "shortDescr")
+        newManagedObject.setValue(recipe.preparation, forKey: "preparation")
+        newManagedObject.setValue(recipe.imageLocation, forKey: "imageLocation")
+        
+        // Save the context.
+        var error: NSError? = nil
+        if !context.save(&error) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            //println("Unresolved error \(error), \(error.userInfo)")
+            abort()
+        }
+    }
+
+    
     
     func saveContext () {
         if let moc = managedObjectContext {
@@ -63,6 +150,8 @@ class ModelRecipes {
             }
         }
     }
+    
+    
     /*
     subscript(index: Int) ->theRecipe? {
         get {
