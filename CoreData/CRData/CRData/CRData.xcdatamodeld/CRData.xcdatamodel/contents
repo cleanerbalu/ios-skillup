@@ -4,14 +4,9 @@
         <attribute name="timeStamp" optional="YES" attributeType="Date">
             <userInfo/>
         </attribute>
-        <relationship name="type2dict" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TypeDictionary" syncable="YES"/>
         <userInfo/>
     </entity>
-    <entity name="TypeDictionary" syncable="YES">
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
     <elements>
-        <element name="Event" positionX="-4860" positionY="-1764" width="128" height="73"/>
-        <element name="TypeDictionary" positionX="-4709" positionY="-1660" width="128" height="58"/>
+        <element name="Event" positionX="-4860" positionY="-1764" width="128" height="60"/>
     </elements>
 </model>

@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedResultsControllerDelegate {
+class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate {
     var data: ModelRecipes?
     
     override func viewDidLoad() {
@@ -78,7 +78,16 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
 
     
     func takePicture() {
-        //UIImagePickerController.
+        if (UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerSourceType.Camera) {
+            let impick = UIImagePickerController()
+            impick.sourceType = UIImagePickerControllerSourceType.Camera
+            impick.delegate = self
+            self.presentViewController(viewControllerToPresent: impick, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+        NSFileManager.defaultManager().createFileAtPath(<#path: String#>, contents: <#NSData?#>, attributes: <#[NSObject : AnyObject]?#>) image.
     }
 }
 
