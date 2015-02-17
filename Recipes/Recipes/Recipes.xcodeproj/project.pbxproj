@@ -16,6 +16,7 @@
 		623414B31A8FA203001426BE /* ModelRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623414B21A8FA203001426BE /* ModelRecipes.swift */; };
 		623414B51A8FAA81001426BE /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623414B41A8FAA81001426BE /* RecipeCell.swift */; };
 		623414EB1A8FBAB8001426BE /* Recipe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 623414E91A8FBAB8001426BE /* Recipe.xcdatamodeld */; };
+		62ADC1231A93A7E8005C7167 /* AddNewRecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62ADC1221A93A7E8005C7167 /* AddNewRecipeController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		623414B21A8FA203001426BE /* ModelRecipes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelRecipes.swift; sourceTree = "<group>"; };
 		623414B41A8FAA81001426BE /* RecipeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
 		623414EA1A8FBAB8001426BE /* Recipe.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Recipe.xcdatamodel; sourceTree = "<group>"; };
+		62ADC1221A93A7E8005C7167 /* AddNewRecipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewRecipeController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			children = (
 				623414921A8FA106001426BE /* AppDelegate.swift */,
 				623414941A8FA106001426BE /* MyViewController.swift */,
+				62ADC1221A93A7E8005C7167 /* AddNewRecipeController.swift */,
 				623414991A8FA106001426BE /* Images.xcassets */,
 				6234149B1A8FA106001426BE /* LaunchScreen.xib */,
 				623414961A8FA106001426BE /* Main.storyboard */,
@@ -225,6 +228,7 @@
 				623414931A8FA106001426BE /* AppDelegate.swift in Sources */,
 				623414EB1A8FBAB8001426BE /* Recipe.xcdatamodeld in Sources */,
 				623414B31A8FA203001426BE /* ModelRecipes.swift in Sources */,
+				62ADC1231A93A7E8005C7167 /* AddNewRecipeController.swift in Sources */,
 				623414B51A8FAA81001426BE /* RecipeCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,6 +423,7 @@
 				623414AE1A8FA106001426BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		623414AF1A8FA106001426BE /* Build configuration list for PBXNativeTarget "RecipesTests" */ = {
 			isa = XCConfigurationList;
@@ -427,6 +432,7 @@
 				623414B11A8FA106001426BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

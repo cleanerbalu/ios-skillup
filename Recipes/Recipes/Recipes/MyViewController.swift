@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedResultsControllerDelegate,UIImagePickerControllerDelegate {
+class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedResultsControllerDelegate {
     var data: ModelRecipes?
     
     override func viewDidLoad() {
@@ -18,6 +18,7 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         // Do any additional setup after loading the view, typically from a nib.
         data = ModelRecipes()
         data?.fetchedResultsController.delegate = self
+        data?.insertNewObject(ModelRecipes.recipeDataType(shortDescribtion: "shortest", preparation: "how to prepare", imageLocation: nil))
         
     }
 
@@ -34,13 +35,27 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         return section.numberOfObjects
     }
     
-    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("recipecell", forIndexPath: indexPath) as RecipeCell
+        configureCell(cell, atIndexPath: indexPath)
+        return cell
+    }
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let object = data?.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject
-        (cell as RecipeCell).lblDescription!.text = object.valueForKey("shortDescr")!.description
+        let recipeCell = cell as RecipeCell
+        recipeCell.lblDescription!.text = object.valueForKey("shortDescr")!.description
+        recipeCell.txtPreparation!.text = object.valueForKey("preparation")!.description
+        //recipeCell.theImage?.images =
+        
+        
     }
     
+    @IBAction func go2addRecipe(sender: AnyObject) {
+        self.performSegueWithIdentifier("addRecipe", sender: self)
+    }
+    
+    func 
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         self.tableView.beginUpdates()
     }
@@ -77,17 +92,8 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
     }
 
     
-    func takePicture() {
-        if (UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerSourceType.Camera) {
-            let impick = UIImagePickerController()
-            impick.sourceType = UIImagePickerControllerSourceType.Camera
-            impick.delegate = self
-            self.presentViewController(viewControllerToPresent: impick, animated: true, completion: nil)
-        }
-    }
     
-    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
-        NSFileManager.defaultManager().createFileAtPath(<#path: String#>, contents: <#NSData?#>, attributes: <#[NSObject : AnyObject]?#>) image.
-    }
+    
+    
 }
 
