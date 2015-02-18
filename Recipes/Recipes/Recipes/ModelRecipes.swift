@@ -38,7 +38,7 @@ class ModelRecipes {
             let appURLs = NSFileManager.defaultManager().URLsForDirectory( .DocumentDirectory, inDomains: .UserDomainMask)
             let docsDirURL = appURLs[appURLs.count-1] as NSURL
             let sqlURL = docsDirURL.URLByAppendingPathComponent("recipe.sqlite")
-            
+            println("sqlURL \(sqlURL)")
             var error: NSError? = nil
             var failureReason = "There was an error creating or loading the application's saved data."
             
@@ -59,6 +59,28 @@ class ModelRecipes {
             managedObjectContext?.persistentStoreCoordinator = persistentStoreCoordinator
             
             println("modelrecipe init done")
+        }
+        
+    }
+    func removeFromFetchedResults(atIndexPath indexPath: NSIndexPath) {
+        if _fetchedResultsController != nil {
+            let object = _fetchedResultsController?.objectAtIndexPath(indexPath) as NSManagedObject
+            if let obj: AnyObject = object.valueForKey("imageLocation") {
+                let filePath = "\(glPicturePath)/\(obj.description)"
+                var error: NSError?
+                if NSFileManager.defaultManager().removeItemAtPath(filePath, error: &error) {
+                    println("File removed \(filePath)")
+                } else {
+                    println("Error remove file: \(error!.localizedDescription)")
+                }
+                
+            }
+            
+            
+            managedObjectContext?.deleteObject(object)
+            saveContext()
+            
+           
         }
         
     }

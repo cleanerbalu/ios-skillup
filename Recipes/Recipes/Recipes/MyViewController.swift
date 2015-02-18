@@ -9,6 +9,9 @@
 import UIKit
 import CoreData
 
+
+
+
 class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedResultsControllerDelegate {
     var data: ModelRecipes?
     
@@ -18,7 +21,7 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         // Do any additional setup after loading the view, typically from a nib.
         data = ModelRecipes()
         data?.fetchedResultsController.delegate = self
-        data?.insertNewObject(ModelRecipes.recipeDataType(shortDescribtion: "shortest", preparation: "how to prepare", imageLocation: nil))
+        //data?.insertNewObject(ModelRecipes.recipeDataType(shortDescribtion: "shortest", preparation: "how to prepare", imageLocation: nil))
         
     }
 
@@ -41,21 +44,36 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         return cell
     }
     
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            data?.removeFromFetchedResults(atIndexPath: indexPath)
+           
+        }
+    }
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let object = data?.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject
         let recipeCell = cell as RecipeCell
         recipeCell.lblDescription!.text = object.valueForKey("shortDescr")!.description
         recipeCell.txtPreparation!.text = object.valueForKey("preparation")!.description
-        //recipeCell.theImage?.images =
+        if let obj: AnyObject = object.valueForKey("imageLocation") {
+            recipeCell.theImage?.image = UIImage(contentsOfFile: "\(glPicturePath)/\(obj.description)")
+        } else {
+            //recipeCell.theImage?.image = UIImage(contentsOfFile: "Unknown.jpg")
+        }
         
         
     }
     
     @IBAction func go2addRecipe(sender: AnyObject) {
         self.performSegueWithIdentifier("addRecipe", sender: self)
+        
     }
     
-    func 
+    
+ 
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         self.tableView.beginUpdates()
     }

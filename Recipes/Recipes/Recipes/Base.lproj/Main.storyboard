@@ -9,37 +9,46 @@
         <scene sceneID="UFM-Uq-1ue">
             <objects>
                 <tableViewController id="kcp-n9-53E" customClass="MyViewController" customModule="Recipes" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1Ys-xb-eOi">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="145" sectionHeaderHeight="22" sectionFooterHeight="22" id="1Ys-xb-eOi">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipecell" rowHeight="144" id="hTb-PL-TKF" customClass="RecipeCell" customModule="Recipes" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="recipecell" rowHeight="145" id="hTb-PL-TKF" customClass="RecipeCell" customModule="Recipes" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hTb-PL-TKF" id="4EA-Ro-bqd">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tcx-sJ-K1Q">
-                                            <rect key="frame" x="462" y="2" width="130" height="135"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Unknown.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="tcx-sJ-K1Q">
+                                            <rect key="frame" x="462" y="9" width="130" height="127"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="130" id="5w2-QP-TT1"/>
+                                            </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CYX-R7-dPx">
-                                            <rect key="frame" x="16" y="8" width="438" height="21"/>
+                                            <rect key="frame" x="8" y="9" width="446" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xr-JD-cSL">
-                                            <rect key="frame" x="16" y="40" width="438" height="95"/>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xr-JD-cSL">
+                                            <rect key="frame" x="8" y="40" width="446" height="96"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="CYX-R7-dPx" firstAttribute="leading" secondItem="4EA-Ro-bqd" secondAttribute="leadingMargin" constant="85" id="IUz-hI-PAb"/>
-                                        <constraint firstAttribute="bottom" secondItem="CYX-R7-dPx" secondAttribute="bottom" constant="3" id="Js4-eQ-glG"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="CYX-R7-dPx" secondAttribute="trailing" constant="5" id="qzb-Le-BvC"/>
+                                        <constraint firstItem="CYX-R7-dPx" firstAttribute="top" secondItem="4EA-Ro-bqd" secondAttribute="topMargin" id="6GT-N6-LH3"/>
+                                        <constraint firstItem="4xr-JD-cSL" firstAttribute="leading" secondItem="4EA-Ro-bqd" secondAttribute="leadingMargin" id="IY9-RV-FUj"/>
+                                        <constraint firstItem="CYX-R7-dPx" firstAttribute="trailing" secondItem="tcx-sJ-K1Q" secondAttribute="leading" constant="-8" id="JY6-UU-FjZ"/>
+                                        <constraint firstItem="tcx-sJ-K1Q" firstAttribute="trailing" secondItem="4EA-Ro-bqd" secondAttribute="trailingMargin" id="Urm-1Z-Qjk"/>
+                                        <constraint firstItem="tcx-sJ-K1Q" firstAttribute="top" secondItem="CYX-R7-dPx" secondAttribute="top" id="VYi-iv-t97"/>
+                                        <constraint firstItem="4xr-JD-cSL" firstAttribute="top" secondItem="CYX-R7-dPx" secondAttribute="bottom" constant="10" id="d85-0e-m4f"/>
+                                        <constraint firstItem="4xr-JD-cSL" firstAttribute="bottom" secondItem="4EA-Ro-bqd" secondAttribute="bottomMargin" id="gUJ-KP-TqS"/>
+                                        <constraint firstItem="tcx-sJ-K1Q" firstAttribute="leading" secondItem="4xr-JD-cSL" secondAttribute="trailing" constant="8" id="pwJ-qq-AYu"/>
+                                        <constraint firstItem="CYX-R7-dPx" firstAttribute="leading" secondItem="4EA-Ro-bqd" secondAttribute="leadingMargin" id="r6C-y4-KgP"/>
+                                        <constraint firstItem="tcx-sJ-K1Q" firstAttribute="bottom" secondItem="4EA-Ro-bqd" secondAttribute="bottomMargin" id="zjn-39-8Ol"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -81,31 +90,45 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ynh-NO-nHm" userLabel="short descr">
-                                <rect key="frame" x="41" y="20" width="531" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ej3-ub-nAN">
-                                <rect key="frame" x="41" y="77" width="531" height="205"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <rect key="frame" x="284" y="124" width="282" height="445"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="myl-SF-OJ8">
-                                <rect key="frame" x="41" y="222" width="240" height="358"/>
+                                <rect key="frame" x="35" y="124" width="241" height="368"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XRU-an-K2W">
-                                <rect key="frame" x="366" y="232" width="106" height="22"/>
+                                <rect key="frame" x="91" y="500" width="106" height="22"/>
                                 <state key="normal" title="Take Photo"/>
                                 <connections>
                                     <action selector="getPicture:" destination="nCT-Lw-Zl4" eventType="touchUpInside" id="LEY-FU-wmO"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2QJ-Pu-KcA">
+                                <rect key="frame" x="97" y="539" width="100" height="30"/>
+                                <state key="normal" title="Save Recipe">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="SaveData:" destination="nCT-Lw-Zl4" eventType="touchUpInside" id="CeM-Sr-rAj"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ynh-NO-nHm" userLabel="short descr">
+                                <rect key="frame" x="35" y="79" width="531" height="30"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="lblDescription" destination="Ynh-NO-nHm" id="SOR-0s-Qcd"/>
+                        <outlet property="theImage" destination="myl-SF-OJ8" id="ZPt-7K-hBx"/>
+                        <outlet property="txtPreparation" destination="ej3-ub-nAN" id="Ept-TK-X12"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n1J-Md-R5P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -128,4 +151,7 @@
             <point key="canvasLocation" x="-107" y="531"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Unknown.jpg" width="225" height="225"/>
+    </resources>
 </document>
