@@ -59,9 +59,9 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         recipeCell.lblDescription!.text = object.valueForKey("shortDescr")!.description
         recipeCell.txtPreparation!.text = object.valueForKey("preparation")!.description
         if let obj: AnyObject = object.valueForKey("imageLocation") {
-            recipeCell.theImage?.image = UIImage(contentsOfFile: "\(glPicturePath)/\(obj.description)")
-        } else {
-            //recipeCell.theImage?.image = UIImage(contentsOfFile: "Unknown.jpg")
+            if obj.description != nil {
+                recipeCell.theImage?.image = UIImage(contentsOfFile: "\(glPicturePath)/\(obj.description)")
+            }
         }
         
         

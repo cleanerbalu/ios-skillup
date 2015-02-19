@@ -22,6 +22,7 @@ class ModelRecipes {
         var shortDescribtion: String? = nil
         var preparation: String? = nil
         var imageLocation: String? = nil
+        var image: UIImage? = nil
     }
     
     init(){
@@ -75,12 +76,8 @@ class ModelRecipes {
                 }
                 
             }
-            
-            
             managedObjectContext?.deleteObject(object)
             saveContext()
-            
-           
         }
         
     }
@@ -145,11 +142,22 @@ class ModelRecipes {
         //let entity = fetchedResultsController.fetchRequest.entity!
         let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName("TheRecipe", inManagedObjectContext: context) as NSManagedObject
         
+        var fileName: String? = nil
+        if recipe.image != nil {
+            var imageData = UIImagePNGRepresentation(recipe.image)
+            let fileManager = NSFileManager.defaultManager()
+            let uuid = NSUUID().UUIDString
+            fileName = "recipe\(uuid).png"
+            let filePathToWrite = "\(glPicturePath)/\(fileName!)"
+            fileManager.createFileAtPath(filePathToWrite, contents: imageData, attributes: nil)
+            println("insertNewObject \(filePathToWrite)")
+        }
+        
         // If appropriate, configure the new managed object.
         // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
         newManagedObject.setValue(recipe.shortDescribtion, forKey: "shortDescr")
         newManagedObject.setValue(recipe.preparation, forKey: "preparation")
-        newManagedObject.setValue(recipe.imageLocation, forKey: "imageLocation")
+        newManagedObject.setValue(fileName, forKey: "imageLocation")
         
         // Save the context.
         var error: NSError? = nil

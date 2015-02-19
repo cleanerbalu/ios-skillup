@@ -17,19 +17,28 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
     var recipeModel = ModelRecipes()
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         theImage?.backgroundColor = UIColor.lightGrayColor()
-        println ("AddNewRecipeController didload")
-    
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: "tapListener:")
+        tapGesture.numberOfTapsRequired = 1
+        //tapGesture.nu
+        self.theImage?.addGestureRecognizer(tapGesture)
+        self.theImage?.userInteractionEnabled = true
     }
     
+    func tapListener(gesture: UITapGestureRecognizer){
+        //if gesture.state == UIGestureRecognizerState.Ended {
+            takePicture()
+        //}
+        
+    }
     @IBAction func SaveData(sender: AnyObject) {
         var descr = ""
         var prep = ""
         if let data = lblDescription?.text { descr = data }
         if let data = txtPreparation?.text { prep = data }
-        println("Descf \(descr)")
-        println("Prep \(prep)")
         
         if descr.isEmpty {
             let alrt = UIAlertView(title: "Error", message: "Please specify short description", delegate: nil, cancelButtonTitle: "Ok")
@@ -38,18 +47,11 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
             let alrt = UIAlertView(title: "Error", message: "Please specify preparation", delegate: nil, cancelButtonTitle: "Ok")
             alrt.show()
         } else {
-            var imageData = UIImagePNGRepresentation(theImage?.image)
-            let fileManager = NSFileManager.defaultManager()
-            let uuid = NSUUID().UUIDString
-            let fileName = "recipe\(uuid).png"
-            let filePathToWrite = "\(glPicturePath)/\(fileName)"
-            fileManager.createFileAtPath(filePathToWrite, contents: imageData, attributes: nil)
-            println(filePathToWrite)
-            
-            recipeModel.insertNewObject(ModelRecipes.recipeDataType(shortDescribtion: descr, preparation: prep , imageLocation: fileName))
+            recipeModel.insertNewObject(ModelRecipes.recipeDataType(shortDescribtion: descr, preparation: prep , imageLocation: nil, image: theImage?.image))
             lblDescription?.text = ""
             txtPreparation?.text = ""
             theImage?.image = nil
+            self.navigationController?.popViewControllerAnimated(true)
         }
     
         
@@ -78,6 +80,7 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         
         //NSFileManager.defaultManager().createFileAtPath(<#path: String#>, contents: <#NSData?#>, attributes: <#[NSObject : AnyObject]?#>) image.
     }
+    
     
     
 }
