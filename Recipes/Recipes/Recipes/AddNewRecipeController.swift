@@ -63,9 +63,9 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
 
     
     func takePicture() {
-        if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)) {
+        if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)) {
             let impick = UIImagePickerController()
-            impick.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            impick.sourceType = UIImagePickerControllerSourceType.Camera
             impick.delegate = self
             self.presentViewController(impick, animated: true, completion: nil)
         } else {
@@ -77,7 +77,7 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         println("didFinishPickingImage")
         theImage?.image = image
-        
+        picker.dismissViewControllerAnimated(true, completion: nil)
         //NSFileManager.defaultManager().createFileAtPath(<#path: String#>, contents: <#NSData?#>, attributes: <#[NSObject : AnyObject]?#>) image.
     }
     
