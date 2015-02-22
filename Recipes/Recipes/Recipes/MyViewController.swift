@@ -66,6 +66,13 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         if recipeCell.superview == self {
             println("view are same")
         }
+        recipeCell.locButton.hidden = true
+        if let crd: AnyObject =  object.valueForKey("crdLong") {
+            if crd.description != nil {
+                recipeCell.locButton.hidden = false
+            }
+        }
+        
         recipeCell.supView = self
         
         

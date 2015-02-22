@@ -18,6 +18,7 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
     var recipeModel = ModelRecipes()
     var locManager: CLLocationManager?
     
+    var currentCoord: CLLocationCoordinate2D? = nil
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -33,7 +34,10 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         locManager?.startUpdatingLocation()
     }
     
-    
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        currentCoord = (locations[locations.count-1] as CLLocation).coordinate
+        
+    }
     
     func tapListener(gesture: UITapGestureRecognizer){
         //if gesture.state == UIGestureRecognizerState.Ended {
@@ -54,20 +58,22 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
             let alrt = UIAlertView(title: "Error", message: "Please specify preparation", delegate: nil, cancelButtonTitle: "Ok")
             alrt.show()
         } else {
-            recipeModel.insertNewObject(ModelRecipes.recipeDataType(shortDescribtion: descr, preparation: prep , imageLocation: nil, image: theImage?.image))
+            recipeModel.insertNewObject(ModelRecipes.recipeDataType(shortDescribtion: descr, preparation: prep , image: theImage?.image,coords: currentCoord ))
             lblDescription?.text = ""
             txtPreparation?.text = ""
             theImage?.image = nil
             self.navigationController?.popViewControllerAnimated(true)
         }
-    
-        
     }
     
     @IBAction func getPicture(sender: AnyObject) {
         takePicture()
     }
 
+    override func viewWillDisappear(animated: Bool) {
+        println("AddNewReciprContr will disapear")
+        locManager?.stopUpdatingLocation()
+    }
     
     func takePicture() {
         if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)) {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9Sg-dw-Fch">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9Sg-dw-Fch">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -96,6 +96,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="lblDescription" destination="CYX-R7-dPx" id="MET-5Z-mUP"/>
+                                    <outlet property="locButton" destination="QuP-fH-Uvt" id="FRj-eX-1Mv"/>
                                     <outlet property="theImage" destination="tcx-sJ-K1Q" id="FJr-Zg-Wh4"/>
                                     <outlet property="txtPreparation" destination="4xr-JD-cSL" id="d8R-lU-1de"/>
                                 </connections>

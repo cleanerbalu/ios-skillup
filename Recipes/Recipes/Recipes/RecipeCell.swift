@@ -14,6 +14,8 @@ class RecipeCell: UITableViewCell {
     @IBOutlet var theImage: UIImageView?
     weak var supView: MyViewController?
     
+    @IBOutlet weak var locButton: UIButton!
+    
     @IBAction func showLocation(sender: AnyObject) {
         supView?.performSegueWithIdentifier("location", sender: sender)
     }

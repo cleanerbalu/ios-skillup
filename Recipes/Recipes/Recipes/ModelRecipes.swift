@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import CoreData
-
+import CoreLocation
 
 private var managedObjectModel: NSManagedObjectModel?
 private var managedObjectContext: NSManagedObjectContext?
@@ -21,8 +21,9 @@ class ModelRecipes {
     struct recipeDataType {
         var shortDescribtion: String? = nil
         var preparation: String? = nil
-        var imageLocation: String? = nil
+        //var imageLocation: String? = nil
         var image: UIImage? = nil
+        var coords: CLLocationCoordinate2D? = nil
     }
     
     init(){
@@ -152,6 +153,10 @@ class ModelRecipes {
             println("insertNewObject \(filePathToWrite)")
         }
         
+        if let theCoord = recipe.coords {
+            newManagedObject.setValue(recipe.coords?.longitude, forKey: "crdLon")
+            newManagedObject.setValue(recipe.coords?.latitude, forKey: "crdLat")
+        }
         // If appropriate, configure the new managed object.
         // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
         newManagedObject.setValue(recipe.shortDescribtion, forKey: "shortDescr")
