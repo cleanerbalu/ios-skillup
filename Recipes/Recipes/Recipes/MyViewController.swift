@@ -29,7 +29,7 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return data?.fetchedResultsController.sections?.count ?? 0
     }
@@ -63,6 +63,10 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
                 recipeCell.theImage?.image = UIImage(contentsOfFile: "\(glPicturePath)/\(obj.description)")
             }
         }
+        if recipeCell.superview == self {
+            println("view are same")
+        }
+        recipeCell.supView = self
         
         
     }

@@ -12,4 +12,9 @@ class RecipeCell: UITableViewCell {
     @IBOutlet var lblDescription: UILabel?
     @IBOutlet var txtPreparation: UITextView?
     @IBOutlet var theImage: UIImageView?
+    weak var supView: MyViewController?
+    
+    @IBAction func showLocation(sender: AnyObject) {
+        supView?.performSegueWithIdentifier("location", sender: sender)
+    }
 }

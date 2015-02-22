@@ -8,13 +8,15 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
-class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,CLLocationManagerDelegate {
     @IBOutlet var lblDescription: UITextField?
     @IBOutlet var txtPreparation: UITextView?
     @IBOutlet var theImage: UIImageView?
 
     var recipeModel = ModelRecipes()
+    var locManager: CLLocationManager?
     
     override func viewDidLoad() {
         
@@ -26,7 +28,12 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         //tapGesture.nu
         self.theImage?.addGestureRecognizer(tapGesture)
         self.theImage?.userInteractionEnabled = true
+        
+        locManager = CLLocationManager()
+        locManager?.startUpdatingLocation()
     }
+    
+    
     
     func tapListener(gesture: UITapGestureRecognizer){
         //if gesture.state == UIGestureRecognizerState.Ended {

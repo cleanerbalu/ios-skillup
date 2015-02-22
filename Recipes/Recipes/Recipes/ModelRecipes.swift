@@ -26,7 +26,6 @@ class ModelRecipes {
     }
     
     init(){
-        println("modelrecipe!")
         if managedObjectContext == nil {
             /*load the model*/
             let modelURL = NSBundle.mainBundle().URLForResource("Recipe", withExtension: "momd")
