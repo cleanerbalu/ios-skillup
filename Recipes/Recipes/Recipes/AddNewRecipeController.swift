@@ -42,7 +42,9 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
                 
                 locMan.desiredAccuracy = kCLLocationAccuracyBest
                 if locMan.respondsToSelector("requestWhenInUseAuthorization") {
+                    
                     locMan.requestWhenInUseAuthorization()
+                    println("realy did requestWhenInUseAuthorization")
                 } else {
                     println("no respond on requestWhenInUseAuthorization")
                 }

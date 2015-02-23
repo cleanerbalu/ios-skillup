@@ -8,15 +8,22 @@
 
 import Foundation
 import UIKit
+import CoreLocation
+
 class RecipeCell: UITableViewCell {
     @IBOutlet var lblDescription: UILabel?
     @IBOutlet var txtPreparation: UITextView?
     @IBOutlet var theImage: UIImageView?
     weak var supView: MyViewController?
+    var coords: CLLocationCoordinate2D? = nil
     
     @IBOutlet weak var locButton: UIButton!
     
     @IBAction func showLocation(sender: AnyObject) {
-        supView?.performSegueWithIdentifier("location", sender: sender)
+        println("Sender tag = \(sender.tag)")
+        supView?.performSegueWithIdentifier("location", sender: self)
+        
     }
+  
+
 }

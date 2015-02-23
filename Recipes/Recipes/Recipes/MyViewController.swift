@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-
+import CoreLocation
 
 
 
@@ -70,29 +70,41 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         
         
         recipeCell.locButton.hidden = true
-        /*if let crd: AnyObject =  object.valueForKey("crdLon") {
-            if crd.description != nil {
-                recipeCell.locButton.hidden = false
-            }
-        }*/
-        
+        recipeCell.locButton.tag = indexPath.row
         
         if let crd: NSNumber =  object.valueForKey("isLocationPresent") as? NSNumber {
             recipeCell.locButton.hidden = !crd.boolValue
-            println("presents")
+            if crd.boolValue {
+                recipeCell.coords = CLLocationCoordinate2D(
+                    latitude: (object.valueForKey("crdLat") as NSNumber).doubleValue,
+                    longitude: (object.valueForKey("crdLon") as NSNumber).doubleValue)
+                println("configure cell coords \(recipeCell.coords?.latitude)")
+            }
+            
         }
-        
         recipeCell.supView = self
-        
-        
     }
     
     @IBAction func go2addRecipe(sender: AnyObject) {
         self.performSegueWithIdentifier("addRecipe", sender: self)
-        
     }
     
-    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "location" {
+            println("Prepare segue")
+            let dst = segue.destinationViewController as MapViewController
+            if let recpcell = sender as? RecipeCell {
+                dst.coord = recpcell.coords
+                println("prepareForSegue coords is here");
+            } else {
+                println("prepareForSegue no coords");
+            }
+            //dst.coord = CLLocationCoordinate2DMake(<#latitude: CLLocationDegrees#>, <#longitude: CLLocationDegrees#>)
+            //self.tableView.
+        
+        }
+    }
  
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         self.tableView.beginUpdates()
