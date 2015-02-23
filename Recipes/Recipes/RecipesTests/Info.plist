@@ -20,5 +20,9 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>You must know where you saved recipe!</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Ooo! Always remember recipe location!</string>
 </dict>
 </plist>

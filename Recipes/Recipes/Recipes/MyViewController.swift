@@ -58,6 +58,7 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         let recipeCell = cell as RecipeCell
         recipeCell.lblDescription!.text = object.valueForKey("shortDescr")!.description
         recipeCell.txtPreparation!.text = object.valueForKey("preparation")!.description
+        
         if let obj: AnyObject = object.valueForKey("imageLocation") {
             if obj.description != nil {
                 recipeCell.theImage?.image = UIImage(contentsOfFile: "\(glPicturePath)/\(obj.description)")
@@ -66,11 +67,19 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         if recipeCell.superview == self {
             println("view are same")
         }
+        
+        
         recipeCell.locButton.hidden = true
-        if let crd: AnyObject =  object.valueForKey("crdLong") {
+        /*if let crd: AnyObject =  object.valueForKey("crdLon") {
             if crd.description != nil {
                 recipeCell.locButton.hidden = false
             }
+        }*/
+        
+        
+        if let crd: NSNumber =  object.valueForKey("isLocationPresent") as? NSNumber {
+            recipeCell.locButton.hidden = !crd.boolValue
+            println("presents")
         }
         
         recipeCell.supView = self

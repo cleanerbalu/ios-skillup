@@ -152,11 +152,15 @@ class ModelRecipes {
             fileManager.createFileAtPath(filePathToWrite, contents: imageData, attributes: nil)
             println("insertNewObject \(filePathToWrite)")
         }
-        
+        var locPresent = false
         if let theCoord = recipe.coords {
             newManagedObject.setValue(recipe.coords?.longitude, forKey: "crdLon")
             newManagedObject.setValue(recipe.coords?.latitude, forKey: "crdLat")
+            locPresent = true
+            println("modelrecipe coord saved")
         }
+        newManagedObject.setValue(locPresent, forKey: "isLocationPresent")
+        
         // If appropriate, configure the new managed object.
         // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
         newManagedObject.setValue(recipe.shortDescribtion, forKey: "shortDescr")

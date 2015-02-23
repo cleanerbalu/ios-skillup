@@ -30,11 +30,32 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         self.theImage?.addGestureRecognizer(tapGesture)
         self.theImage?.userInteractionEnabled = true
         
-        locManager = CLLocationManager()
-        locManager?.startUpdatingLocation()
+        
+        //location detection
+        if CLLocationManager.locationServicesEnabled() {
+            println("locserv enabled")
+            locManager = CLLocationManager()
+            
+            if let locMan = locManager {
+                print("locManager is here")
+                locMan.delegate = self
+                if locMan.respondsToSelector("requestWhenInUseAuthorization") {
+                    locMan.requestWhenInUseAuthorization()
+                } else {
+                    println("no respond on requestWhenInUseAuthorization")
+                }
+                
+                locMan.startUpdatingLocation()
+            } else {
+                print("No locManager")
+            }
+        } else {
+            println("locserv disabled")
+        }
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        println("locationManager coord saved")
         currentCoord = (locations[locations.count-1] as CLLocation).coordinate
         
     }
