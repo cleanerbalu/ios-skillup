@@ -19,7 +19,7 @@
 		6260AB861A99B0E6005D7A17 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 6260AB851A99B0E6005D7A17 /* location.png */; };
 		6260AB881A99B8FD005D7A17 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6260AB871A99B8FD005D7A17 /* MapKit.framework */; };
 		62ADC1231A93A7E8005C7167 /* AddNewRecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62ADC1221A93A7E8005C7167 /* AddNewRecipeController.swift */; };
-		62C407801A9B11190010571D /* RecipeManageObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C4077F1A9B11190010571D /* RecipeManageObj.swift */; };
+		62FC9D1C1A9B241200A28FDA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62FC9D1B1A9B241200A28FDA /* CoreLocation.framework */; };
 		62FDA8CA1A94EEAB00E15908 /* Unknown.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 62FDA8C91A94EEAB00E15908 /* Unknown.jpg */; };
 /* End PBXBuildFile section */
 
@@ -50,7 +50,7 @@
 		6260AB851A99B0E6005D7A17 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = location.png; path = Recipes/location.png; sourceTree = "<group>"; };
 		6260AB871A99B8FD005D7A17 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		62ADC1221A93A7E8005C7167 /* AddNewRecipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewRecipeController.swift; sourceTree = "<group>"; };
-		62C4077F1A9B11190010571D /* RecipeManageObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeManageObj.swift; sourceTree = "<group>"; };
+		62FC9D1B1A9B241200A28FDA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		62FDA8C91A94EEAB00E15908 /* Unknown.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Unknown.jpg; path = Recipes/Unknown.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -59,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62FC9D1C1A9B241200A28FDA /* CoreLocation.framework in Frameworks */,
 				6260AB881A99B8FD005D7A17 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -76,6 +77,7 @@
 		623414841A8FA106001426BE = {
 			isa = PBXGroup;
 			children = (
+				62FC9D1B1A9B241200A28FDA /* CoreLocation.framework */,
 				6260AB871A99B8FD005D7A17 /* MapKit.framework */,
 				6260AB851A99B0E6005D7A17 /* location.png */,
 				62FDA8C91A94EEAB00E15908 /* Unknown.jpg */,
@@ -107,7 +109,6 @@
 				623414B21A8FA203001426BE /* ModelRecipes.swift */,
 				623414B41A8FAA81001426BE /* RecipeCell.swift */,
 				623414E91A8FBAB8001426BE /* Recipe.xcdatamodeld */,
-				62C4077F1A9B11190010571D /* RecipeManageObj.swift */,
 			);
 			path = Recipes;
 			sourceTree = "<group>";
@@ -242,7 +243,6 @@
 				623414951A8FA106001426BE /* MyViewController.swift in Sources */,
 				623414931A8FA106001426BE /* AppDelegate.swift in Sources */,
 				623414EB1A8FBAB8001426BE /* Recipe.xcdatamodeld in Sources */,
-				62C407801A9B11190010571D /* RecipeManageObj.swift in Sources */,
 				623414B31A8FA203001426BE /* ModelRecipes.swift in Sources */,
 				62ADC1231A93A7E8005C7167 /* AddNewRecipeController.swift in Sources */,
 				623414B51A8FAA81001426BE /* RecipeCell.swift in Sources */,

@@ -37,8 +37,10 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
             locManager = CLLocationManager()
             
             if let locMan = locManager {
-                print("locManager is here")
+                println("locManager is here")
                 locMan.delegate = self
+                
+                locMan.desiredAccuracy = kCLLocationAccuracyBest
                 if locMan.respondsToSelector("requestWhenInUseAuthorization") {
                     locMan.requestWhenInUseAuthorization()
                 } else {
@@ -46,8 +48,9 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
                 }
                 
                 locMan.startUpdatingLocation()
+                locMan.startUpdatingHeading()
             } else {
-                print("No locManager")
+                println("No locManager")
             }
         } else {
             println("locserv disabled")
@@ -58,6 +61,12 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         println("locationManager coord saved")
         currentCoord = (locations[locations.count-1] as CLLocation).coordinate
         
+    }
+    func locationManager(manager: CLLocationManager!, didUpdateHeading newHeading: CLHeading!) {
+        println("got heading update")
+    }
+    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+        println(error)
     }
     
     func tapListener(gesture: UITapGestureRecognizer){
@@ -94,6 +103,7 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
     override func viewWillDisappear(animated: Bool) {
         println("AddNewReciprContr will disapear")
         locManager?.stopUpdatingLocation()
+        locManager?.stopUpdatingHeading()
     }
     
     func takePicture() {
