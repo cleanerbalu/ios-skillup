@@ -25,6 +25,9 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         
     }
 
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.toolbarHidden = true
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -79,6 +82,8 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
                     latitude: (object.valueForKey("crdLat") as NSNumber).doubleValue,
                     longitude: (object.valueForKey("crdLon") as NSNumber).doubleValue)
                 println("configure cell coords \(recipeCell.coords?.latitude)")
+            } else {
+                recipeCell.coords = nil
             }
             
         }
@@ -100,8 +105,6 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
             } else {
                 println("prepareForSegue no coords");
             }
-            //dst.coord = CLLocationCoordinate2DMake(<#latitude: CLLocationDegrees#>, <#longitude: CLLocationDegrees#>)
-            //self.tableView.
         
         }
     }

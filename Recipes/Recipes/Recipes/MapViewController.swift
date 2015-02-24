@@ -30,7 +30,9 @@ class MapViewController: UIViewController {
             println("I don't have coordinates")
         }
     }
-    @IBAction func CloseMe(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.toolbarHidden = true
     }
+
 }

@@ -9,12 +9,14 @@
 import Foundation
 import UIKit
 import CoreLocation
+import MapKit
 
 class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,CLLocationManagerDelegate {
     @IBOutlet var lblDescription: UITextField?
     @IBOutlet var txtPreparation: UITextView?
     @IBOutlet var theImage: UIImageView?
-
+    @IBOutlet weak var mapUserLoc: MKMapView!
+    
     var recipeModel = ModelRecipes()
     var locManager: CLLocationManager?
     
@@ -59,10 +61,20 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.toolbarHidden = false
+    }
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         println("locationManager coord saved")
         currentCoord = (locations[locations.count-1] as CLLocation).coordinate
         
+        mapUserLoc.setRegion(MKCoordinateRegionMakeWithDistance(currentCoord!, 1000, 1000), animated: true)
+        let annot = MKPointAnnotation()
+        annot.setCoordinate(currentCoord!)
+        annot.title = "Here did you the recipe"
+        mapUserLoc.addAnnotation(annot)
+        println("Annotation done")
+       
     }
     func locationManager(manager: CLLocationManager!, didUpdateHeading newHeading: CLHeading!) {
         println("got heading update")
@@ -72,9 +84,9 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func tapListener(gesture: UITapGestureRecognizer){
-        //if gesture.state == UIGestureRecognizerState.Ended {
-            takePicture()
-        //}
+        if gesture.state == UIGestureRecognizerState.Ended {
+            takePicture(UIImagePickerControllerSourceType.Camera)
+        }
         
     }
     @IBAction func SaveData(sender: AnyObject) {
@@ -98,8 +110,18 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         }
     }
     
-    @IBAction func getPicture(sender: AnyObject) {
-        takePicture()
+    @IBAction func getPicture(sender: UIBarButtonItem) {
+        switch sender.tag {
+        case 0:
+           takePicture(UIImagePickerControllerSourceType.Camera)
+        case 1:
+            takePicture(UIImagePickerControllerSourceType.PhotoLibrary)
+        case 2:
+            break
+        default:
+            break
+        }
+        
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -108,10 +130,10 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         locManager?.stopUpdatingHeading()
     }
     
-    func takePicture() {
-        if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)) {
+    func takePicture(source: UIImagePickerControllerSourceType) {
+        if (UIImagePickerController.isSourceTypeAvailable(source)) {
             let impick = UIImagePickerController()
-            impick.sourceType = UIImagePickerControllerSourceType.Camera
+            impick.sourceType = source
             impick.delegate = self
             self.presentViewController(impick, animated: true, completion: nil)
         } else {
@@ -124,8 +146,7 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         println("didFinishPickingImage")
         theImage?.image = image
         picker.dismissViewControllerAnimated(true, completion: nil)
-        //NSFileManager.defaultManager().createFileAtPath(<#path: String#>, contents: <#NSData?#>, attributes: <#[NSObject : AnyObject]?#>) image.
-    }
+     }
     
     
     

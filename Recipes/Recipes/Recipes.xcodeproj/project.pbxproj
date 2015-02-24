@@ -23,6 +23,7 @@
 		62FC9D1C1A9B241200A28FDA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62FC9D1B1A9B241200A28FDA /* CoreLocation.framework */; };
 		62FC9D1E1A9B461800A28FDA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FC9D1D1A9B461800A28FDA /* MapViewController.swift */; };
 		62FDA8CA1A94EEAB00E15908 /* Unknown.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 62FDA8C91A94EEAB00E15908 /* Unknown.jpg */; };
+		62FFD0FF1A9C96C100D44516 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 62FFD0FE1A9C96C100D44516 /* camera.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		62FC9D1B1A9B241200A28FDA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		62FC9D1D1A9B461800A28FDA /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		62FDA8C91A94EEAB00E15908 /* Unknown.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Unknown.jpg; path = Recipes/Unknown.jpg; sourceTree = "<group>"; };
+		62FFD0FE1A9C96C100D44516 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera.png; path = Recipes/camera.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,10 +83,9 @@
 		623414841A8FA106001426BE = {
 			isa = PBXGroup;
 			children = (
+				62FFD0FD1A9C964200D44516 /* Images */,
 				62FC9D1B1A9B241200A28FDA /* CoreLocation.framework */,
 				6260AB871A99B8FD005D7A17 /* MapKit.framework */,
-				6260AB851A99B0E6005D7A17 /* location.png */,
-				62FDA8C91A94EEAB00E15908 /* Unknown.jpg */,
 				6234148F1A8FA106001426BE /* Recipes */,
 				623414A51A8FA106001426BE /* RecipesTests */,
 				6234148E1A8FA106001426BE /* Products */,
@@ -107,14 +108,14 @@
 				623414921A8FA106001426BE /* AppDelegate.swift */,
 				6287E0C71A9B60AF002E34FB /* MyTableView.swift */,
 				623414941A8FA106001426BE /* MyViewController.swift */,
+				62FC9D1D1A9B461800A28FDA /* MapViewController.swift */,
 				62ADC1221A93A7E8005C7167 /* AddNewRecipeController.swift */,
-				623414991A8FA106001426BE /* Images.xcassets */,
-				6234149B1A8FA106001426BE /* LaunchScreen.xib */,
 				623414961A8FA106001426BE /* Main.storyboard */,
 				623414B21A8FA203001426BE /* ModelRecipes.swift */,
 				623414B41A8FAA81001426BE /* RecipeCell.swift */,
 				623414E91A8FBAB8001426BE /* Recipe.xcdatamodeld */,
-				62FC9D1D1A9B461800A28FDA /* MapViewController.swift */,
+				6234149B1A8FA106001426BE /* LaunchScreen.xib */,
+				623414991A8FA106001426BE /* Images.xcassets */,
 			);
 			path = Recipes;
 			sourceTree = "<group>";
@@ -142,6 +143,16 @@
 				623414A71A8FA106001426BE /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		62FFD0FD1A9C964200D44516 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				62FFD0FE1A9C96C100D44516 /* camera.png */,
+				62FDA8C91A94EEAB00E15908 /* Unknown.jpg */,
+				6260AB851A99B0E6005D7A17 /* location.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,6 +239,7 @@
 				6234149D1A8FA106001426BE /* LaunchScreen.xib in Resources */,
 				6260AB861A99B0E6005D7A17 /* location.png in Resources */,
 				62FDA8CA1A94EEAB00E15908 /* Unknown.jpg in Resources */,
+				62FFD0FF1A9C96C100D44516 /* camera.png in Resources */,
 				6234149A1A8FA106001426BE /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
