@@ -9,51 +9,45 @@
 import UIKit
 
 class MyDrawView: UIView {
-    var points: [CGPoint]
-    var myPath = UIBezierPath()
-    
+    var myPath = [UIBezierPath()]
+    var currentPath: UIBezierPath?
     override init() {
-        points = []
-        myPath.lineWidth = 4.0
+        myPath = []
         super.init()
     }
     
     required init(coder aDecoder: NSCoder) {
-        points = []
-        myPath.lineWidth = 4.0
-        
+        myPath = []
         super.init(coder: aDecoder)
     }
     override func drawRect(rect: CGRect) {
         UIColor.redColor().setStroke()
-        /*
-        if points.count > 1 {
-            myPath.moveToPoint(points[0])
-            for idx in 1...(points.count-1) {
-                myPath.addLineToPoint(points[idx])
-            }
-            
-            myPath.stroke()
-        }*/
-        myPath.stroke()
-        println("drawRect \(rect)")
+        for path in myPath {
+            path.stroke()
+        }
+        if let cur = currentPath {
+            cur.stroke()
+        }
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         let touch = touches.anyObject() as UITouch
         let pnt = touch.locationInView(self)
-        points.append(pnt)
-        if points.count > 1 {
-            myPath.moveToPoint(pnt)
-        } else {
-            myPath.addLineToPoint(pnt)
-        }
-        println("touch added")
+        currentPath = UIBezierPath()
+        currentPath?.moveToPoint(pnt)
         self.setNeedsDisplay()
     }
     
     override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
-        touchesBegan(touches,withEvent: event)
+        let touch = touches.anyObject() as UITouch
+        let pnt = touch.locationInView(self)
+        currentPath?.addLineToPoint(pnt)
+        self.setNeedsDisplay()
+    }
+    
+    override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+        myPath.append(currentPath!)
+        self.setNeedsDisplay()
     }
     
 }
