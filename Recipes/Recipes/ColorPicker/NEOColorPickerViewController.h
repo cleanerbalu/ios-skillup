@@ -21,7 +21,7 @@
  
  */
 
-
+#import <UIKit/UIKit.h>
 #import "NEOColorPickerBaseViewController.h"
 
 @interface NEOColorPickerViewController : NEOColorPickerBaseViewController

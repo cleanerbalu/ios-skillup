@@ -9,45 +9,62 @@
 import UIKit
 
 class MyDrawView: UIView {
-    var myPath = [UIBezierPath()]
-    var currentPath: UIBezierPath?
+    struct BezierColor {
+        let myPath: UIBezierPath
+        let color: UIColor
+    }
+    var myPicture = [BezierColor]()
+    var currentPath: BezierColor?
+    var color: UIColor
     override init() {
-        myPath = []
+        myPicture = []
+        color = UIColor.blackColor()
         super.init()
     }
     
     required init(coder aDecoder: NSCoder) {
-        myPath = []
+        myPicture = []
+        color = UIColor.blackColor()
         super.init(coder: aDecoder)
     }
     override func drawRect(rect: CGRect) {
-        UIColor.redColor().setStroke()
-        for path in myPath {
-            path.stroke()
+        color.setStroke()
+        for pict in myPicture {
+            pict.color.setStroke()
+            pict.myPath.stroke()
         }
         if let cur = currentPath {
-            cur.stroke()
+            cur.color.setStroke()
+            cur.myPath.stroke()
         }
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         let touch = touches.anyObject() as UITouch
         let pnt = touch.locationInView(self)
-        currentPath = UIBezierPath()
-        currentPath?.moveToPoint(pnt)
+        
+        
+        currentPath = BezierColor(myPath: UIBezierPath(),color: color)
+        currentPath?.myPath.moveToPoint(pnt)
         self.setNeedsDisplay()
     }
     
     override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
         let touch = touches.anyObject() as UITouch
         let pnt = touch.locationInView(self)
-        currentPath?.addLineToPoint(pnt)
+        
+        currentPath?.myPath.addLineToPoint(pnt)
         self.setNeedsDisplay()
     }
     
     override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
-        myPath.append(currentPath!)
+         myPicture.append(currentPath!)
         self.setNeedsDisplay()
     }
+    
+    func setCurrentColor(newColor: UIColor){
+        color = newColor
+    }
+    
     
 }
