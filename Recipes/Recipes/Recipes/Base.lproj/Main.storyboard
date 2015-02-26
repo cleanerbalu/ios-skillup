@@ -185,6 +185,13 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Ve-qq-rcN">
                                 <rect key="frame" x="364" y="446" width="225" height="95"/>
                             </mapView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location.png" translatesAutoresizingMaskIntoConstraints="NO" id="mkG-zR-xqB">
+                                <rect key="frame" x="364" y="405" width="32" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="04f-GH-Dom"/>
+                                    <constraint firstAttribute="width" constant="32" id="SaW-dK-DgZ"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -197,8 +204,10 @@
                             <constraint firstItem="Ynh-NO-nHm" firstAttribute="leading" secondItem="g8Y-h7-078" secondAttribute="trailing" constant="5" id="IQH-b6-WbS"/>
                             <constraint firstItem="ej3-ub-nAN" firstAttribute="leading" secondItem="iLC-JQ-Jcm" secondAttribute="leadingMargin" id="Jnj-zq-yh5"/>
                             <constraint firstItem="0u7-Hz-VjO" firstAttribute="top" secondItem="ej3-ub-nAN" secondAttribute="bottom" constant="15" id="OmH-YA-Njd"/>
+                            <constraint firstItem="myl-SF-OJ8" firstAttribute="leading" secondItem="mkG-zR-xqB" secondAttribute="leading" id="QYs-2D-zxl"/>
                             <constraint firstItem="7Ve-qq-rcN" firstAttribute="leading" secondItem="ej3-ub-nAN" secondAttribute="trailing" constant="15" id="R1T-HB-5Se"/>
                             <constraint firstItem="g8Y-h7-078" firstAttribute="leading" secondItem="iLC-JQ-Jcm" secondAttribute="leadingMargin" constant="5" id="RPl-lM-7vi"/>
+                            <constraint firstItem="mkG-zR-xqB" firstAttribute="bottom" secondItem="myl-SF-OJ8" secondAttribute="bottom" id="THK-QF-hf8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Ynh-NO-nHm" secondAttribute="trailing" constant="5" id="V5M-lV-FKS"/>
                             <constraint firstItem="8Ge-6X-LPS" firstAttribute="leading" secondItem="iLC-JQ-Jcm" secondAttribute="leadingMargin" constant="5" id="WFx-At-BkP"/>
                             <constraint firstItem="7Ve-qq-rcN" firstAttribute="trailing" secondItem="iLC-JQ-Jcm" secondAttribute="trailingMargin" constant="5" id="fLw-D9-Gmb"/>
@@ -207,9 +216,15 @@
                             <constraint firstItem="ej3-ub-nAN" firstAttribute="top" secondItem="8Ge-6X-LPS" secondAttribute="bottom" constant="5" id="ntx-CB-aBp"/>
                             <constraint firstItem="ej3-ub-nAN" firstAttribute="top" secondItem="myl-SF-OJ8" secondAttribute="top" id="oCr-q0-TMo"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="mkG-zR-xqB"/>
+                            </mask>
+                        </variation>
                         <variation key="heightClass=compact">
                             <mask key="subviews">
                                 <exclude reference="7Ve-qq-rcN"/>
+                                <include reference="mkG-zR-xqB"/>
                             </mask>
                         </variation>
                     </view>
@@ -219,12 +234,19 @@
                                 <action selector="getPicture:" destination="nCT-Lw-Zl4" id="jZk-ri-lE2"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="4Wv-mf-fWY"/>
                         <barButtonItem tag="1" systemItem="organize" id="oqg-p7-vVL">
                             <connections>
                                 <action selector="getPicture:" destination="nCT-Lw-Zl4" id="oRC-lN-fxw"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem tag="3" systemItem="compose" id="Q6g-ld-zyV"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="3Ir-wk-86X"/>
+                        <barButtonItem tag="3" systemItem="compose" id="Q6g-ld-zyV">
+                            <connections>
+                                <action selector="getPicture:" destination="nCT-Lw-Zl4" id="rgF-EW-dE9"/>
+                                <segue destination="Jg5-u9-bq0" kind="show" identifier="draw" id="vf6-mr-4vF"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="New recipe" id="cmJ-vL-StS">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="2QO-k4-xbH">
@@ -236,6 +258,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="lblDescription" destination="Ynh-NO-nHm" id="SOR-0s-Qcd"/>
+                        <outlet property="locationDetected" destination="mkG-zR-xqB" id="EfO-cm-xmU"/>
                         <outlet property="mapUserLoc" destination="7Ve-qq-rcN" id="FfE-ad-n69"/>
                         <outlet property="theImage" destination="myl-SF-OJ8" id="ZPt-7K-hBx"/>
                         <outlet property="txtPreparation" destination="ej3-ub-nAN" id="Ept-TK-X12"/>
@@ -244,6 +267,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n1J-Md-R5P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1400" y="531"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Tgl-G8-uzg">
+            <objects>
+                <viewController id="Jg5-u9-bq0" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GH4-GB-iLN"/>
+                        <viewControllerLayoutGuide type="bottom" id="Krn-NF-50H"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="j58-I4-abD" customClass="MyDrawView" customModule="Recipes" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9nD-62-plI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1400" y="1254"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rLz-EN-7Ab">

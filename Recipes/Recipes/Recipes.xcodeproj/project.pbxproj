@@ -18,7 +18,7 @@
 		623414EB1A8FBAB8001426BE /* Recipe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 623414E91A8FBAB8001426BE /* Recipe.xcdatamodeld */; };
 		6260AB861A99B0E6005D7A17 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 6260AB851A99B0E6005D7A17 /* location.png */; };
 		6260AB881A99B8FD005D7A17 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6260AB871A99B8FD005D7A17 /* MapKit.framework */; };
-		6287E0C81A9B60AF002E34FB /* MyTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6287E0C71A9B60AF002E34FB /* MyTableView.swift */; };
+		6287E0C81A9B60AF002E34FB /* MyDrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6287E0C71A9B60AF002E34FB /* MyDrawView.swift */; };
 		62ADC1231A93A7E8005C7167 /* AddNewRecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62ADC1221A93A7E8005C7167 /* AddNewRecipeController.swift */; };
 		62FC9D1C1A9B241200A28FDA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62FC9D1B1A9B241200A28FDA /* CoreLocation.framework */; };
 		62FC9D1E1A9B461800A28FDA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FC9D1D1A9B461800A28FDA /* MapViewController.swift */; };
@@ -52,7 +52,7 @@
 		623414EA1A8FBAB8001426BE /* Recipe.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Recipe.xcdatamodel; sourceTree = "<group>"; };
 		6260AB851A99B0E6005D7A17 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = location.png; path = Recipes/location.png; sourceTree = "<group>"; };
 		6260AB871A99B8FD005D7A17 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		6287E0C71A9B60AF002E34FB /* MyTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableView.swift; sourceTree = "<group>"; };
+		6287E0C71A9B60AF002E34FB /* MyDrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDrawView.swift; sourceTree = "<group>"; };
 		62ADC1221A93A7E8005C7167 /* AddNewRecipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewRecipeController.swift; sourceTree = "<group>"; };
 		62FC9D1B1A9B241200A28FDA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		62FC9D1D1A9B461800A28FDA /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -106,7 +106,7 @@
 			children = (
 				623414901A8FA106001426BE /* Supporting Files */,
 				623414921A8FA106001426BE /* AppDelegate.swift */,
-				6287E0C71A9B60AF002E34FB /* MyTableView.swift */,
+				6287E0C71A9B60AF002E34FB /* MyDrawView.swift */,
 				623414941A8FA106001426BE /* MyViewController.swift */,
 				62FC9D1D1A9B461800A28FDA /* MapViewController.swift */,
 				62ADC1221A93A7E8005C7167 /* AddNewRecipeController.swift */,
@@ -263,7 +263,7 @@
 				623414EB1A8FBAB8001426BE /* Recipe.xcdatamodeld in Sources */,
 				623414B31A8FA203001426BE /* ModelRecipes.swift in Sources */,
 				62ADC1231A93A7E8005C7167 /* AddNewRecipeController.swift in Sources */,
-				6287E0C81A9B60AF002E34FB /* MyTableView.swift in Sources */,
+				6287E0C81A9B60AF002E34FB /* MyDrawView.swift in Sources */,
 				623414B51A8FAA81001426BE /* RecipeCell.swift in Sources */,
 				62FC9D1E1A9B461800A28FDA /* MapViewController.swift in Sources */,
 			);

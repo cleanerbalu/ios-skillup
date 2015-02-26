@@ -12,11 +12,13 @@ import CoreLocation
 import MapKit
 
 class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,CLLocationManagerDelegate {
-    @IBOutlet var lblDescription: UITextField?
-    @IBOutlet var txtPreparation: UITextView?
-    @IBOutlet var theImage: UIImageView?
+    @IBOutlet weak var lblDescription: UITextField?
+    @IBOutlet weak var txtPreparation: UITextView?
+    @IBOutlet weak var theImage: UIImageView?
     @IBOutlet weak var mapUserLoc: MKMapView!
+    @IBOutlet weak var locationDetected: UIImageView!
     
+    var timer: NSTimer? = nil
     var recipeModel = ModelRecipes()
     var locManager: CLLocationManager?
     
@@ -43,6 +45,7 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
                 locMan.delegate = self
                 
                 locMan.desiredAccuracy = kCLLocationAccuracyBest
+                
                 if locMan.respondsToSelector("requestWhenInUseAuthorization") {
                     
                     locMan.requestWhenInUseAuthorization()
@@ -52,7 +55,7 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
                 }
                 
                 locMan.startUpdatingLocation()
-                locMan.startUpdatingHeading()
+                //locMan.startUpdatingHeading()
             } else {
                 println("No locManager")
             }
@@ -64,17 +67,44 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.toolbarHidden = false
     }
+    
+    func turnOnLocation (){
+        if let locMan = locManager {
+            locMan.startUpdatingLocation()
+        }
+        
+    }
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         println("locationManager coord saved")
         currentCoord = (locations[locations.count-1] as CLLocation).coordinate
         
-        mapUserLoc.setRegion(MKCoordinateRegionMakeWithDistance(currentCoord!, 1000, 1000), animated: true)
-        let annot = MKPointAnnotation()
-        annot.setCoordinate(currentCoord!)
-        annot.title = "Here did you the recipe"
-        mapUserLoc.addAnnotation(annot)
-        println("Annotation done")
-       
+        if mapUserLoc.superview != nil {
+            mapUserLoc.setRegion(MKCoordinateRegionMakeWithDistance(currentCoord!, 1000, 1000), animated: true)
+            let annot = MKPointAnnotation()
+            annot.setCoordinate(currentCoord!)
+            annot.title = "Here did you the recipe"
+            mapUserLoc.addAnnotation(annot)
+            println("Annotation done")
+        
+        }
+        
+        if locationDetected.superview != nil {
+            UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: CGFloat(0.3), initialSpringVelocity: CGFloat(3.0), options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+                    self.locationDetected.hidden = false
+                    //self.locationDetected.transform = CGAffineTransformMakeRotation(2*3.14)
+                    self.locationDetected.transform = CGAffineTransformMakeScale(0.7, 0.7)//(2*3.14)
+                },
+                completion: { finished in
+                     UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: CGFloat(0.3), initialSpringVelocity: CGFloat(3.0), options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+                            self.locationDetected.transform = CGAffineTransformMakeScale(1, 1)
+                     },completion: nil)
+                }
+            )
+        }
+
+       manager.stopUpdatingLocation()
+       timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "turnOnLocation", userInfo: nil, repeats: false)
+        
     }
     func locationManager(manager: CLLocationManager!, didUpdateHeading newHeading: CLHeading!) {
         println("got heading update")
@@ -117,6 +147,7 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         case 1:
             takePicture(UIImagePickerControllerSourceType.PhotoLibrary)
         case 2:
+            self.performSegueWithIdentifier("draw", sender: self)
             break
         default:
             break
@@ -128,6 +159,7 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         println("AddNewReciprContr will disapear")
         locManager?.stopUpdatingLocation()
         locManager?.stopUpdatingHeading()
+        timer?.invalidate()
     }
     
     func takePicture(source: UIImagePickerControllerSourceType) {
