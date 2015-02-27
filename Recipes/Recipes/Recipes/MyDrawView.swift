@@ -63,6 +63,7 @@ class MyDrawView: UIView {
     
     override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
          myPicture.append(currentPath!)
+        currentPath = nil
         self.setNeedsDisplay()
     }
     
@@ -73,15 +74,13 @@ class MyDrawView: UIView {
     func undoLine() {
         if myPicture.count>0 {
             myPicture.removeLast()
-            layoutIfNeeded()
+            self.setNeedsDisplay()
         }
     }
     
     func clear() {
         myPicture = []
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.setNeedsDisplay()
-        })
+        self.setNeedsDisplay()
     }
     
     func increaseLine(){

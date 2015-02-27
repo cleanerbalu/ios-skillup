@@ -35,6 +35,9 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         self.theImage?.userInteractionEnabled = true
         
         
+        let tapPreparation = UITapGestureRecognizer(target: self,action: "inputPreparation:")
+        txtPreparation?.addGestureRecognizer(tapPreparation)
+        
         //location detection
         if CLLocationManager.locationServicesEnabled() {
             println("locserv enabled")
@@ -63,16 +66,20 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
             println("locserv disabled")
         }
         
-        
         lblDescription?.delegate = self
+        
+
     }
+    
+
+    
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.toolbarHidden = false
     }
     
     
-    
+  
     
     func turnOnLocation (){
         if let locMan = locManager {
@@ -162,10 +169,15 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "draw" {
-            let dst = segue.destinationViewController as MyDrawViewController
-            dst.addRecipeViewController = self
+                let dst = segue.destinationViewController as MyDrawViewController
+                dst.addRecipeViewController = self
+        } else if segue.identifier == "notes" {
+                let dst = segue.destinationViewController as MyNoteViewController
+                dst.addRecipeController = self
+                //dst.theNote.text = txtPreparation?.text
         }
     }
+    
     override func viewWillDisappear(animated: Bool) {
         println("AddNewReciprContr will disapear")
         locManager?.stopUpdatingLocation()
@@ -198,6 +210,10 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return false
+    }
+    
+    func inputPreparation(gesture: UITapGestureRecognizer) {
+        performSegueWithIdentifier("notes", sender: nil)
     }
     
 }

@@ -46,6 +46,7 @@ class MyDrawViewController: UIViewController,NEOColorPickerViewControllerDelegat
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         addRecipeViewController?.takeDrawenImage(img)
+        navigationController?.popViewControllerAnimated(true)
     }
     
 

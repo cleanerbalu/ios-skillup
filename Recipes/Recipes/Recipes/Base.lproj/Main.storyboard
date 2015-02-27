@@ -155,18 +155,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ej3-ub-nAN" userLabel="InputPreparation">
-                                <rect key="frame" x="16" y="141" width="333" height="400"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="eZY-Ti-1TO"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                                <variation key="heightClass=compact-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="16" y="141" width="612" height="200"/>
-                                </variation>
-                            </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to prepare:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ge-6X-LPS">
                                 <rect key="frame" x="21" y="115" width="124" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -192,6 +180,18 @@
                                     <constraint firstAttribute="width" constant="32" id="SaW-dK-DgZ"/>
                                 </constraints>
                             </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ej3-ub-nAN" userLabel="InputPreparation">
+                                <rect key="frame" x="16" y="141" width="333" height="400"/>
+                                <color key="backgroundColor" red="1" green="1" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="eZY-Ti-1TO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <variation key="heightClass=compact-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="16" y="141" width="612" height="200"/>
+                                </variation>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -238,7 +238,6 @@
                         <barButtonItem tag="1" systemItem="organize" id="oqg-p7-vVL">
                             <connections>
                                 <action selector="getPicture:" destination="nCT-Lw-Zl4" id="oRC-lN-fxw"/>
-                                <segue destination="tKI-jg-jjh" kind="show" id="kSU-vS-0kq"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="3Ir-wk-86X"/>
@@ -263,16 +262,17 @@
                         <outlet property="mapUserLoc" destination="7Ve-qq-rcN" id="FfE-ad-n69"/>
                         <outlet property="theImage" destination="myl-SF-OJ8" id="ZPt-7K-hBx"/>
                         <outlet property="txtPreparation" destination="ej3-ub-nAN" id="Ept-TK-X12"/>
+                        <segue destination="tKI-jg-jjh" kind="show" identifier="notes" id="pdu-9S-H05"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n1J-Md-R5P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1400" y="531"/>
         </scene>
-        <!--View Controller-->
+        <!--My Note View Controller-->
         <scene sceneID="Zfr-hD-Rbo">
             <objects>
-                <viewController id="tKI-jg-jjh" sceneMemberID="viewController">
+                <viewController id="tKI-jg-jjh" customClass="MyNoteViewController" customModule="Recipes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="srF-Hw-Nhg"/>
                         <viewControllerLayoutGuide type="bottom" id="NM0-2Q-hMo"/>
@@ -281,9 +281,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4UQ-Vu-4iN">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="4UQ-Vu-4iN">
+                                <rect key="frame" x="0.0" y="64" width="600" height="492"/>
+                                <color key="backgroundColor" red="1" green="1" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -291,11 +291,22 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="4UQ-Vu-4iN" secondAttribute="trailing" id="5h2-A0-udk"/>
+                            <constraint firstItem="4UQ-Vu-4iN" firstAttribute="top" secondItem="srF-Hw-Nhg" secondAttribute="bottom" id="BYN-El-ZvD"/>
                             <constraint firstItem="4UQ-Vu-4iN" firstAttribute="leading" secondItem="fRk-Fo-oAc" secondAttribute="leading" id="EgO-Ib-zYZ"/>
-                            <constraint firstItem="4UQ-Vu-4iN" firstAttribute="top" secondItem="srF-Hw-Nhg" secondAttribute="bottom" id="YLb-Td-SPE"/>
-                            <constraint firstItem="4UQ-Vu-4iN" firstAttribute="top" secondItem="fRk-Fo-oAc" secondAttribute="topMargin" id="uiZ-by-YYa"/>
+                            <constraint firstItem="4UQ-Vu-4iN" firstAttribute="bottom" secondItem="NM0-2Q-hMo" secondAttribute="top" id="LRW-xD-bOj"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="f8Z-Bd-una">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="6N4-12-p2K">
+                            <connections>
+                                <action selector="saveNote:" destination="tKI-jg-jjh" id="iuY-am-fqO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="theNote" destination="4UQ-Vu-4iN" id="NYu-Bc-YUq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ywx-DC-Lkq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
