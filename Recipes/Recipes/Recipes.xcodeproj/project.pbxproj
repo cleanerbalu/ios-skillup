@@ -25,7 +25,6 @@
 		623414931A8FA106001426BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623414921A8FA106001426BE /* AppDelegate.swift */; };
 		623414951A8FA106001426BE /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623414941A8FA106001426BE /* MyViewController.swift */; };
 		623414981A8FA106001426BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 623414961A8FA106001426BE /* Main.storyboard */; };
-		6234149A1A8FA106001426BE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 623414991A8FA106001426BE /* Images.xcassets */; };
 		6234149D1A8FA106001426BE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6234149B1A8FA106001426BE /* LaunchScreen.xib */; };
 		623414A91A8FA106001426BE /* RecipesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623414A81A8FA106001426BE /* RecipesTests.swift */; };
 		623414B31A8FA203001426BE /* ModelRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623414B21A8FA203001426BE /* ModelRecipes.swift */; };
@@ -42,8 +41,8 @@
 		62FDA8CA1A94EEAB00E15908 /* Unknown.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 62FDA8C91A94EEAB00E15908 /* Unknown.jpg */; };
 		62FE66DA1AA047600063F976 /* lazuri.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 62FE66D91AA047600063F976 /* lazuri.jpg */; };
 		62FE66DC1AA047920063F976 /* lazuri2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 62FE66DB1AA047920063F976 /* lazuri2.jpg */; };
-		62FE66DE1AA04C9E0063F976 /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62FE66DD1AA04C9E0063F976 /* AppIcon.xcassets */; };
 		62FE66E01AA080B50063F976 /* MyNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FE66DF1AA080B50063F976 /* MyNoteViewController.swift */; };
+		62FE66F91AA099710063F976 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62FE66F81AA099710063F976 /* Images.xcassets */; };
 		62FFD0FF1A9C96C100D44516 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 62FFD0FE1A9C96C100D44516 /* camera.png */; };
 /* End PBXBuildFile section */
 
@@ -87,7 +86,6 @@
 		623414921A8FA106001426BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		623414941A8FA106001426BE /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
 		623414971A8FA106001426BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		623414991A8FA106001426BE /* Images.xcassets */ = {isa = PBXFileReference; explicitFileType = wrapper.application; name = Images.xcassets; path = Recipes/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		6234149C1A8FA106001426BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		623414A21A8FA106001426BE /* RecipesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		623414A71A8FA106001426BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -106,8 +104,8 @@
 		62FDA8C91A94EEAB00E15908 /* Unknown.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Unknown.jpg; path = Recipes/Unknown.jpg; sourceTree = "<group>"; };
 		62FE66D91AA047600063F976 /* lazuri.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lazuri.jpg; path = Recipes/lazuri.jpg; sourceTree = "<group>"; };
 		62FE66DB1AA047920063F976 /* lazuri2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lazuri2.jpg; path = Recipes/lazuri2.jpg; sourceTree = "<group>"; };
-		62FE66DD1AA04C9E0063F976 /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = AppIcon.xcassets; path = ../AppIcon.xcassets; sourceTree = "<group>"; };
 		62FE66DF1AA080B50063F976 /* MyNoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyNoteViewController.swift; path = ../MyNoteViewController.swift; sourceTree = "<group>"; };
+		62FE66F81AA099710063F976 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		62FFD0FE1A9C96C100D44516 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera.png; path = Recipes/camera.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -203,8 +201,7 @@
 				623414B41A8FAA81001426BE /* RecipeCell.swift */,
 				623414E91A8FBAB8001426BE /* Recipe.xcdatamodeld */,
 				6234149B1A8FA106001426BE /* LaunchScreen.xib */,
-				62FE66DD1AA04C9E0063F976 /* AppIcon.xcassets */,
-				623414991A8FA106001426BE /* Images.xcassets */,
+				62FE66F81AA099710063F976 /* Images.xcassets */,
 			);
 			path = Recipes;
 			sourceTree = "<group>";
@@ -327,12 +324,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62FE66F91AA099710063F976 /* Images.xcassets in Resources */,
 				6224F8B61A9F4D6100BE6833 /* NEOColorPickerHSLViewController.xib in Resources */,
 				62FE66DC1AA047920063F976 /* lazuri2.jpg in Resources */,
 				62C342B51AA041420067F32B /* palette.jpg in Resources */,
 				623414981A8FA106001426BE /* Main.storyboard in Resources */,
 				6224F8BA1A9F4D6100BE6833 /* NEOColorPickerViewController.xib in Resources */,
-				62FE66DE1AA04C9E0063F976 /* AppIcon.xcassets in Resources */,
 				6224F8B81A9F4D6100BE6833 /* NEOColorPickerHueGridViewController.xib in Resources */,
 				6234149D1A8FA106001426BE /* LaunchScreen.xib in Resources */,
 				6260AB861A99B0E6005D7A17 /* location.png in Resources */,
@@ -340,7 +337,6 @@
 				62FDA8CA1A94EEAB00E15908 /* Unknown.jpg in Resources */,
 				62FFD0FF1A9C96C100D44516 /* camera.png in Resources */,
 				62FE66DA1AA047600063F976 /* lazuri.jpg in Resources */,
-				6234149A1A8FA106001426BE /* Images.xcassets in Resources */,
 				6224F8B01A9F4D6100BE6833 /* colorPicker.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
