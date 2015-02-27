@@ -36,9 +36,13 @@
 		6287E0C81A9B60AF002E34FB /* MyDrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6287E0C71A9B60AF002E34FB /* MyDrawView.swift */; };
 		62ADC1231A93A7E8005C7167 /* AddNewRecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62ADC1221A93A7E8005C7167 /* AddNewRecipeController.swift */; };
 		62B72F021A9F568C00B4824B /* MyDrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B72F011A9F568C00B4824B /* MyDrawViewController.swift */; };
+		62C342B51AA041420067F32B /* palette.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 62C342B41AA041420067F32B /* palette.jpg */; };
 		62FC9D1C1A9B241200A28FDA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62FC9D1B1A9B241200A28FDA /* CoreLocation.framework */; };
 		62FC9D1E1A9B461800A28FDA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FC9D1D1A9B461800A28FDA /* MapViewController.swift */; };
 		62FDA8CA1A94EEAB00E15908 /* Unknown.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 62FDA8C91A94EEAB00E15908 /* Unknown.jpg */; };
+		62FE66DA1AA047600063F976 /* lazuri.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 62FE66D91AA047600063F976 /* lazuri.jpg */; };
+		62FE66DC1AA047920063F976 /* lazuri2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 62FE66DB1AA047920063F976 /* lazuri2.jpg */; };
+		62FE66DE1AA04C9E0063F976 /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62FE66DD1AA04C9E0063F976 /* AppIcon.xcassets */; };
 		62FFD0FF1A9C96C100D44516 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 62FFD0FE1A9C96C100D44516 /* camera.png */; };
 /* End PBXBuildFile section */
 
@@ -82,7 +86,7 @@
 		623414921A8FA106001426BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		623414941A8FA106001426BE /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
 		623414971A8FA106001426BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		623414991A8FA106001426BE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		623414991A8FA106001426BE /* Images.xcassets */ = {isa = PBXFileReference; explicitFileType = wrapper.application; name = Images.xcassets; path = Recipes/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		6234149C1A8FA106001426BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		623414A21A8FA106001426BE /* RecipesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		623414A71A8FA106001426BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -95,9 +99,13 @@
 		6287E0C71A9B60AF002E34FB /* MyDrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDrawView.swift; sourceTree = "<group>"; };
 		62ADC1221A93A7E8005C7167 /* AddNewRecipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewRecipeController.swift; sourceTree = "<group>"; };
 		62B72F011A9F568C00B4824B /* MyDrawViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDrawViewController.swift; sourceTree = "<group>"; };
+		62C342B41AA041420067F32B /* palette.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = palette.jpg; path = Recipes/palette.jpg; sourceTree = "<group>"; };
 		62FC9D1B1A9B241200A28FDA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		62FC9D1D1A9B461800A28FDA /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		62FDA8C91A94EEAB00E15908 /* Unknown.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Unknown.jpg; path = Recipes/Unknown.jpg; sourceTree = "<group>"; };
+		62FE66D91AA047600063F976 /* lazuri.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lazuri.jpg; path = Recipes/lazuri.jpg; sourceTree = "<group>"; };
+		62FE66DB1AA047920063F976 /* lazuri2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lazuri2.jpg; path = Recipes/lazuri2.jpg; sourceTree = "<group>"; };
+		62FE66DD1AA04C9E0063F976 /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = AppIcon.xcassets; path = ../AppIcon.xcassets; sourceTree = "<group>"; };
 		62FFD0FE1A9C96C100D44516 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera.png; path = Recipes/camera.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -192,6 +200,7 @@
 				623414B41A8FAA81001426BE /* RecipeCell.swift */,
 				623414E91A8FBAB8001426BE /* Recipe.xcdatamodeld */,
 				6234149B1A8FA106001426BE /* LaunchScreen.xib */,
+				62FE66DD1AA04C9E0063F976 /* AppIcon.xcassets */,
 				623414991A8FA106001426BE /* Images.xcassets */,
 			);
 			path = Recipes;
@@ -225,6 +234,9 @@
 		62FFD0FD1A9C964200D44516 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				62FE66DB1AA047920063F976 /* lazuri2.jpg */,
+				62FE66D91AA047600063F976 /* lazuri.jpg */,
+				62C342B41AA041420067F32B /* palette.jpg */,
 				62FFD0FE1A9C96C100D44516 /* camera.png */,
 				62FDA8C91A94EEAB00E15908 /* Unknown.jpg */,
 				6260AB851A99B0E6005D7A17 /* location.png */,
@@ -313,14 +325,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				6224F8B61A9F4D6100BE6833 /* NEOColorPickerHSLViewController.xib in Resources */,
+				62FE66DC1AA047920063F976 /* lazuri2.jpg in Resources */,
+				62C342B51AA041420067F32B /* palette.jpg in Resources */,
 				623414981A8FA106001426BE /* Main.storyboard in Resources */,
 				6224F8BA1A9F4D6100BE6833 /* NEOColorPickerViewController.xib in Resources */,
+				62FE66DE1AA04C9E0063F976 /* AppIcon.xcassets in Resources */,
 				6224F8B81A9F4D6100BE6833 /* NEOColorPickerHueGridViewController.xib in Resources */,
 				6234149D1A8FA106001426BE /* LaunchScreen.xib in Resources */,
 				6260AB861A99B0E6005D7A17 /* location.png in Resources */,
 				6224F8B31A9F4D6100BE6833 /* NEOColorPickerFavoritesViewController.xib in Resources */,
 				62FDA8CA1A94EEAB00E15908 /* Unknown.jpg in Resources */,
 				62FFD0FF1A9C96C100D44516 /* camera.png in Resources */,
+				62FE66DA1AA047600063F976 /* lazuri.jpg in Resources */,
 				6234149A1A8FA106001426BE /* Images.xcassets in Resources */,
 				6224F8B01A9F4D6100BE6833 /* colorPicker.bundle in Resources */,
 			);

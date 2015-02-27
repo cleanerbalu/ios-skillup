@@ -8,22 +8,29 @@
 
 
 class MyDrawViewController: UIViewController,NEOColorPickerViewControllerDelegate {
-
+    var addRecipeViewController: AddNewRecipeController?
+    
+    @IBOutlet weak var linewidth: UIBarButtonItem!
+    
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.toolbarHidden = false
+    }
+    
+    @IBAction func undoLastLine(sender: AnyObject) {
+        (self.view as MyDrawView).undoLine()
     }
     
     @IBAction func colorsPicker(sender: AnyObject) {
         let color = NEOColorPickerViewController()
         color.delegate = self
-        color.selectedColor = self.view.backgroundColor
+        color.selectedColor = (view as MyDrawView).getCurrentColor()
         color.title = "Choose color"
         self.navigationController?.toolbarHidden = true
         self.navigationController?.pushViewController(color, animated: true)
     }
 
     func colorPickerViewController(controller: NEOColorPickerBaseViewController!, didSelectColor color: UIColor!) {
-        (self.view as MyDrawView).setCurrentColor(color)
+        (view as MyDrawView).setCurrentColor(color)
          controller.navigationController?.popViewControllerAnimated(true)
     }
  
@@ -31,22 +38,28 @@ class MyDrawViewController: UIViewController,NEOColorPickerViewControllerDelegat
         controller.navigationController?.popViewControllerAnimated(true)
     }
     
-    @IBAction func unwind(sender: UIStoryboardSegue) {
-        println("unwind")
+
+    
+    @IBAction func savePicture(sender: AnyObject) {
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0)
+        view.layer.renderInContext(UIGraphicsGetCurrentContext())
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        addRecipeViewController?.takeDrawenImage(img)
+    }
+    
+
+    @IBAction func clearPicture(sender: AnyObject) {
+        (view as MyDrawView).clear()
         
     }
-    
-    override func canPerformUnwindSegueAction(action: Selector, fromViewController: UIViewController, withSender sender: AnyObject) -> Bool {
-        println("unwind canperform")
-        return true
+   
+    @IBAction func decLine(sender: AnyObject) {
+        (view as MyDrawView).decreaseLine()
+        linewidth.title = String((view as MyDrawView).getLine())
     }
-    
-    override func removeFromParentViewController() {
-        println(" removeFromParentViewController")
+    @IBAction func incLine(sender: AnyObject) {
+        (view as MyDrawView).increaseLine()
+        linewidth.title = String((view as MyDrawView).getLine())
     }
-    
-    override func willMoveToParentViewController(parent: UIViewController?) {
-        println("willMoveToParentViewController")
-    }
-
 }

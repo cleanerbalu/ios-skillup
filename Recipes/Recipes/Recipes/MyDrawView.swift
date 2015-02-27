@@ -14,8 +14,11 @@ class MyDrawView: UIView {
         let color: UIColor
     }
     var myPicture = [BezierColor]()
+    
     var currentPath: BezierColor?
+    var currentWidth: Float = 2.0
     var color: UIColor
+    
     override init() {
         myPicture = []
         color = UIColor.blackColor()
@@ -46,6 +49,7 @@ class MyDrawView: UIView {
         
         currentPath = BezierColor(myPath: UIBezierPath(),color: color)
         currentPath?.myPath.moveToPoint(pnt)
+        currentPath?.myPath.lineWidth = CGFloat(currentWidth)
         self.setNeedsDisplay()
     }
     
@@ -66,5 +70,37 @@ class MyDrawView: UIView {
         color = newColor
     }
     
+    func undoLine() {
+        if myPicture.count>0 {
+            myPicture.removeLast()
+            layoutIfNeeded()
+        }
+    }
     
+    func clear() {
+        myPicture = []
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.setNeedsDisplay()
+        })
+    }
+    
+    func increaseLine(){
+        if currentWidth<15  {
+            currentWidth++
+        }
+        
+    }
+    func decreaseLine() {
+        if currentWidth>1 {
+            currentWidth--
+        }
+        
+    }
+    func getLine() -> Int {
+        return Int(currentWidth)
+    }
+    
+    func getCurrentColor() -> UIColor{
+        return color
+     }
 }

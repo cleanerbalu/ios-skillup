@@ -11,7 +11,7 @@ import UIKit
 import CoreLocation
 import MapKit
 
-class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,CLLocationManagerDelegate {
+class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,CLLocationManagerDelegate, UITextFieldDelegate {
     @IBOutlet weak var lblDescription: UITextField?
     @IBOutlet weak var txtPreparation: UITextView?
     @IBOutlet weak var theImage: UIImageView?
@@ -62,11 +62,17 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         } else {
             println("locserv disabled")
         }
+        
+        
+        lblDescription?.delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.toolbarHidden = false
     }
+    
+    
+    
     
     func turnOnLocation (){
         if let locMan = locManager {
@@ -154,7 +160,12 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         }
         
     }
-
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "draw" {
+            let dst = segue.destinationViewController as MyDrawViewController
+            dst.addRecipeViewController = self
+        }
+    }
     override func viewWillDisappear(animated: Bool) {
         println("AddNewReciprContr will disapear")
         locManager?.stopUpdatingLocation()
@@ -180,6 +191,13 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         picker.dismissViewControllerAnimated(true, completion: nil)
      }
     
+    func takeDrawenImage(img: UIImage){
+        theImage?.image = img
+    }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
     
 }
