@@ -12,8 +12,10 @@ import CoreLocation
 
 
 
-class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedResultsControllerDelegate {
+class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedResultsControllerDelegate,UISearchBarDelegate {
     var data: ModelRecipes?
+    
+    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +23,7 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         // Do any additional setup after loading the view, typically from a nib.
         data = ModelRecipes()
         data?.fetchedResultsController.delegate = self
+        searchBar.delegate = self
         //data?.insertNewObject(ModelRecipes.recipeDataType(shortDescribtion: "shortest", preparation: "how to prepare", imageLocation: nil))
         
     }
@@ -33,6 +36,15 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         // Dispose of any resources that can be recreated.
     }
     
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        data?.filterShortName = searchBar.text
+        tableView.reloadData()
+        println("searchBar search clicked \(searchBar.text)")
+        //data?.fetchedResultsController.
+        searchBar.resignFirstResponder()
+    }
+    
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return data?.fetchedResultsController.sections?.count ?? 0
     }
@@ -44,6 +56,7 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("recipecell", forIndexPath: indexPath) as RecipeCell
         configureCell(cell, atIndexPath: indexPath)
+        println("Row \(indexPath.row)")
         return cell
     }
     
@@ -81,7 +94,7 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
                 recipeCell.coords = CLLocationCoordinate2D(
                     latitude: (object.valueForKey("crdLat") as NSNumber).doubleValue,
                     longitude: (object.valueForKey("crdLon") as NSNumber).doubleValue)
-                println("configure cell coords \(recipeCell.coords?.latitude)")
+                //println("configure cell coords \(recipeCell.coords?.latitude)")
             } else {
                 recipeCell.coords = nil
             }

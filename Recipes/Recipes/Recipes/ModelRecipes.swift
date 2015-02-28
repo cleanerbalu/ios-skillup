@@ -16,7 +16,7 @@ private var managedObjectContext: NSManagedObjectContext?
 private var persistentStoreCoordinator: NSPersistentStoreCoordinator?
 private var appDelegate: UIApplicationDelegate?
 private var _fetchedResultsController: NSFetchedResultsController? = nil
-
+private var _filterShortName: String? = nil
 class ModelRecipes {
     struct recipeDataType {
         var shortDescribtion: String? = nil
@@ -63,6 +63,8 @@ class ModelRecipes {
         }
         
     }
+    
+    
     func removeFromFetchedResults(atIndexPath indexPath: NSIndexPath) {
         if _fetchedResultsController != nil {
             let object = _fetchedResultsController?.objectAtIndexPath(indexPath) as NSManagedObject
@@ -98,7 +100,22 @@ class ModelRecipes {
     }
     
     
-    
+    var  filterShortName: String? {
+        get{
+            return _filterShortName
+        }
+        set {
+            _filterShortName = newValue
+            if let fRC = _fetchedResultsController {
+                let tmp: NSFetchedResultsControllerDelegate? = fRC.delegate
+                _fetchedResultsController = nil
+                managedObjectContext?.reset()
+                fetchedResultsController.delegate = tmp?
+                
+            }
+            
+        }
+    }
     var fetchedResultsController: NSFetchedResultsController {
         if _fetchedResultsController != nil {
             return _fetchedResultsController!
@@ -108,20 +125,21 @@ class ModelRecipes {
         // Edit the entity name as appropriate.
         let entity = NSEntityDescription.entityForName("TheRecipe", inManagedObjectContext: managedObjectContext!)
         fetchRequest.entity = entity
-        
-        // Set the batch size to a suitable number.
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
         let sortDescriptor = NSSortDescriptor(key: "shortDescr", ascending: false)
         let sortDescriptors = [sortDescriptor]
-        
         fetchRequest.sortDescriptors = [sortDescriptor]
         
+        if let shrtName = _filterShortName {
+            let predicate = NSPredicate(format: "shortDescr contains %@", shrtName)
+            fetchRequest.predicate = predicate
+            println("recipeModel used predicate \(shrtName)")
+        }
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
         let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
-        //aFetchedResultsController.delegate = self
         _fetchedResultsController = aFetchedResultsController
         
         var error: NSError? = nil

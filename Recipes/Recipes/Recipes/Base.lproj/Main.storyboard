@@ -47,6 +47,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="nS9-AV-ZaZ">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="recipecell" rowHeight="145" id="hTb-PL-TKF" customClass="RecipeCell" customModule="Recipes" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -120,6 +125,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchBar" destination="nS9-AV-ZaZ" id="Mxs-q8-52E"/>
                         <segue destination="nCT-Lw-Zl4" kind="show" identifier="addRecipe" id="olp-W3-4pZ"/>
                         <segue destination="9ig-7j-IYt" kind="show" identifier="location" id="w6R-Qv-bE5"/>
                     </connections>

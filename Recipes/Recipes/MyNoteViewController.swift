@@ -25,7 +25,10 @@ class MyNoteViewController: UIViewController {
         resetInsets()
        
     }
-   
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+        
+    }
  
     override func viewWillAppear(animated: Bool) {
         navigationController?.toolbarHidden = true
