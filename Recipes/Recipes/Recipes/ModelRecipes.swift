@@ -39,7 +39,7 @@ class ModelRecipes {
             let appURLs = NSFileManager.defaultManager().URLsForDirectory( .DocumentDirectory, inDomains: .UserDomainMask)
             let docsDirURL = appURLs[appURLs.count-1] as NSURL
             let sqlURL = docsDirURL.URLByAppendingPathComponent("recipe.sqlite")
-            println("sqlURL \(sqlURL)")
+            //println("sqlURL \(sqlURL)")
             var error: NSError? = nil
             var failureReason = "There was an error creating or loading the application's saved data."
             
@@ -59,7 +59,8 @@ class ModelRecipes {
             managedObjectContext = NSManagedObjectContext()
             managedObjectContext?.persistentStoreCoordinator = persistentStoreCoordinator
             
-            println("modelrecipe init done")
+            NSFetchedResultsController.deleteCacheWithName("Master")
+            //println("modelrecipe init done")
         }
         
     }
@@ -72,7 +73,7 @@ class ModelRecipes {
                 let filePath = "\(glPicturePath)/\(obj.description)"
                 var error: NSError?
                 if NSFileManager.defaultManager().removeItemAtPath(filePath, error: &error) {
-                    println("File removed \(filePath)")
+                    //println("File removed \(filePath)")
                 } else {
                     println("Error remove file: \(error!.localizedDescription)")
                 }
@@ -99,7 +100,16 @@ class ModelRecipes {
         }
     }
     
-    
+    private func getPredicate() -> NSPredicate? {
+        var predicate: NSPredicate? = nil
+        
+        if let shrtName = _filterShortName {
+            if shrtName != "" {
+                predicate = NSPredicate(format: "shortDescr contains[c] %@", shrtName)
+            }
+        }
+        return predicate
+    }
     var  filterShortName: String? {
         get{
             return _filterShortName
@@ -107,11 +117,15 @@ class ModelRecipes {
         set {
             _filterShortName = newValue
             if let fRC = _fetchedResultsController {
-                let tmp: NSFetchedResultsControllerDelegate? = fRC.delegate
-                _fetchedResultsController = nil
-                managedObjectContext?.reset()
-                fetchedResultsController.delegate = tmp?
+               
                 
+                fRC.fetchRequest.predicate = getPredicate()
+                
+                NSFetchedResultsController.deleteCacheWithName("Master")
+                var error: NSError? = nil
+                if !_fetchedResultsController!.performFetch(&error) {
+                    abort()
+                }
             }
             
         }
@@ -132,11 +146,9 @@ class ModelRecipes {
         let sortDescriptors = [sortDescriptor]
         fetchRequest.sortDescriptors = [sortDescriptor]
         
-        if let shrtName = _filterShortName {
-            let predicate = NSPredicate(format: "shortDescr contains %@", shrtName)
-            fetchRequest.predicate = predicate
-            println("recipeModel used predicate \(shrtName)")
-        }
+        
+        fetchRequest.predicate = getPredicate()
+        
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
         let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
@@ -168,14 +180,14 @@ class ModelRecipes {
             fileName = "recipe\(uuid).png"
             let filePathToWrite = "\(glPicturePath)/\(fileName!)"
             fileManager.createFileAtPath(filePathToWrite, contents: imageData, attributes: nil)
-            println("insertNewObject \(filePathToWrite)")
+            //println("insertNewObject \(filePathToWrite)")
         }
         var locPresent = false
         if let theCoord = recipe.coords {
             newManagedObject.setValue(recipe.coords?.longitude, forKey: "crdLon")
             newManagedObject.setValue(recipe.coords?.latitude, forKey: "crdLat")
             locPresent = true
-            println("modelrecipe coord saved")
+            //println("modelrecipe coord saved")
         }
         newManagedObject.setValue(locPresent, forKey: "isLocationPresent")
         
@@ -206,31 +218,5 @@ class ModelRecipes {
             }
         }
     }
-    
-    
-    /*
-    subscript(index: Int) ->theRecipe? {
-        get {
-            if let dt = data {
-                //return dt[index]
-            } else {
-                return nil;
-            }
-        }
-    
-    }
-    
-    var count: Int {
-        if let dt = data {
-            return dt.count
-        } else {
-            return 0;
-        }
-    }
-    
-    func addRecipe(description: String, preparation: String, img:UIImage) {
-        //let rcp = theRecipe(description: description, preparation: preparation, picture: img)
-        //data?.append(rcp)
-    }
-*/
+  
 }

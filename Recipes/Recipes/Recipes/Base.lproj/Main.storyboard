@@ -118,7 +118,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Recipe List" id="29A-9H-vMv">
-                        <barButtonItem key="rightBarButtonItem" title="Add recipe" id="48W-MT-c0g">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="48W-MT-c0g">
                             <connections>
                                 <action selector="go2addRecipe:" destination="kcp-n9-53E" id="GPZ-Kn-HJ4"/>
                             </connections>
@@ -338,12 +338,13 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem title="2" id="TiU-uT-AWS"/>
-                        <barButtonItem title="-" id="ADm-44-ldX">
+                        <barButtonItem title="-" style="plain" id="ADm-44-ldX">
                             <connections>
                                 <action selector="decLine:" destination="Jg5-u9-bq0" id="Ti5-fR-FVW"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="uTw-Nw-T1P"/>
+                        <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="AGQ-mq-7hI"/>
                         <barButtonItem title="Colors" style="plain" id="N6Q-FN-2u9">
                             <connections>
                                 <action selector="colorsPicker:" destination="Jg5-u9-bq0" id="SNJ-dz-Uwb"/>

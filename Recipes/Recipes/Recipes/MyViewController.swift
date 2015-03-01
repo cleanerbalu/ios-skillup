@@ -19,15 +19,18 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        println ("didload")
-        // Do any additional setup after loading the view, typically from a nib.
         data = ModelRecipes()
         data?.fetchedResultsController.delegate = self
         searchBar.delegate = self
-        //data?.insertNewObject(ModelRecipes.recipeDataType(shortDescribtion: "shortest", preparation: "how to prepare", imageLocation: nil))
+        
+        let tap = UITapGestureRecognizer(target: self, action: "onTap:")
+        tableView.addGestureRecognizer(tap)
         
     }
-
+    func onTap(event: UITapGestureRecognizer){
+        setFilterBySearch(searchBar.text)
+        searchBar.resignFirstResponder()
+    }
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.toolbarHidden = true
     }
@@ -36,14 +39,17 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         // Dispose of any resources that can be recreated.
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        data?.filterShortName = searchBar.text
+    func setFilterBySearch(text: String?){
+        data?.filterShortName = text
         tableView.reloadData()
-        println("searchBar search clicked \(searchBar.text)")
-        //data?.fetchedResultsController.
+    }
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        setFilterBySearch(searchText)
+    }
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        setFilterBySearch(searchBar.text)
         searchBar.resignFirstResponder()
     }
-    
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return data?.fetchedResultsController.sections?.count ?? 0
@@ -56,7 +62,6 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("recipecell", forIndexPath: indexPath) as RecipeCell
         configureCell(cell, atIndexPath: indexPath)
-        println("Row \(indexPath.row)")
         return cell
     }
     

@@ -27,7 +27,7 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         
         super.viewDidLoad()
         theImage?.backgroundColor = UIColor.lightGrayColor()
-        
+        txtPreparation?.layer.cornerRadius = 20
         let tapGesture = UITapGestureRecognizer(target: self, action: "tapListener:")
         tapGesture.numberOfTapsRequired = 1
         //tapGesture.nu
