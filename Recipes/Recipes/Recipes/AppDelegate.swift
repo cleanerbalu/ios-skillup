@@ -33,9 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !NSFileManager.defaultManager().fileExistsAtPath(glPicturePath) {
             NSFileManager.defaultManager().createDirectoryAtPath(glPicturePath, withIntermediateDirectories: false, attributes: nil, error: &error)
         }
-        
-        
-        
         return true
     }
 

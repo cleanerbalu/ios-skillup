@@ -104,7 +104,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UISearchBarD
         else {
             let word = filteredWords != nil ? filteredWords![indexPath.row] : wordsReference.words[wordsReference.wordsIndex[indexPath.row]]
             var translations = ", ".join(word!.translations)
-            cell.textLabel.text = " - ".join([word!.word, translations])
+            cell.textLabel?.text = " - ".join([word!.word, translations])
         }
         
         return cell

@@ -12,25 +12,43 @@ import CoreLocation
 
 
 
-class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedResultsControllerDelegate {
+class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedResultsControllerDelegate,UISearchBarDelegate {
     var data: ModelRecipes?
+    
+    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        println ("didload")
-        // Do any additional setup after loading the view, typically from a nib.
         data = ModelRecipes()
         data?.fetchedResultsController.delegate = self
-        //data?.insertNewObject(ModelRecipes.recipeDataType(shortDescribtion: "shortest", preparation: "how to prepare", imageLocation: nil))
+        searchBar.delegate = self
+        
+        let tap = UITapGestureRecognizer(target: self, action: "onTap:")
+        tableView.addGestureRecognizer(tap)
         
     }
-
+    func onTap(event: UITapGestureRecognizer){
+        setFilterBySearch(searchBar.text)
+        searchBar.resignFirstResponder()
+    }
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.toolbarHidden = true
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setFilterBySearch(text: String?){
+        data?.filterShortName = text
+        tableView.reloadData()
+    }
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        setFilterBySearch(searchText)
+    }
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        setFilterBySearch(searchBar.text)
+        searchBar.resignFirstResponder()
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -81,7 +99,7 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
                 recipeCell.coords = CLLocationCoordinate2D(
                     latitude: (object.valueForKey("crdLat") as NSNumber).doubleValue,
                     longitude: (object.valueForKey("crdLon") as NSNumber).doubleValue)
-                println("configure cell coords \(recipeCell.coords?.latitude)")
+                //println("configure cell coords \(recipeCell.coords?.latitude)")
             } else {
                 recipeCell.coords = nil
             }

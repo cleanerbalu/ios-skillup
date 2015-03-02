@@ -47,6 +47,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="nS9-AV-ZaZ">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="recipecell" rowHeight="145" id="hTb-PL-TKF" customClass="RecipeCell" customModule="Recipes" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -113,13 +118,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Recipe List" id="29A-9H-vMv">
-                        <barButtonItem key="rightBarButtonItem" title="Add recipe" id="48W-MT-c0g">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="48W-MT-c0g">
                             <connections>
                                 <action selector="go2addRecipe:" destination="kcp-n9-53E" id="GPZ-Kn-HJ4"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchBar" destination="nS9-AV-ZaZ" id="Mxs-q8-52E"/>
                         <segue destination="nCT-Lw-Zl4" kind="show" identifier="addRecipe" id="olp-W3-4pZ"/>
                         <segue destination="9ig-7j-IYt" kind="show" identifier="location" id="w6R-Qv-bE5"/>
                     </connections>
@@ -332,12 +338,13 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem title="2" id="TiU-uT-AWS"/>
-                        <barButtonItem title="-" id="ADm-44-ldX">
+                        <barButtonItem title="-" style="plain" id="ADm-44-ldX">
                             <connections>
                                 <action selector="decLine:" destination="Jg5-u9-bq0" id="Ti5-fR-FVW"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="uTw-Nw-T1P"/>
+                        <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="AGQ-mq-7hI"/>
                         <barButtonItem title="Colors" style="plain" id="N6Q-FN-2u9">
                             <connections>
                                 <action selector="colorsPicker:" destination="Jg5-u9-bq0" id="SNJ-dz-Uwb"/>
