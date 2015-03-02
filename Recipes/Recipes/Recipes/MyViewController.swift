@@ -12,7 +12,7 @@ import CoreLocation
 
 
 
-class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedResultsControllerDelegate,UISearchBarDelegate {
+class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedResultsControllerDelegate,UISearchBarDelegate,UITableViewDelegate {
     var data: ModelRecipes?
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -23,14 +23,23 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         data?.fetchedResultsController.delegate = self
         searchBar.delegate = self
         
+    
         let tap = UITapGestureRecognizer(target: self, action: "onTap:")
         tableView.addGestureRecognizer(tap)
         
+        println(NSStringFromClass(self.dynamicType))
+        
+        tableView.allowsSelection = true
+        tableView.delegate = self
     }
+    
     func onTap(event: UITapGestureRecognizer){
         setFilterBySearch(searchBar.text)
         searchBar.resignFirstResponder()
+    
     }
+    
+    
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.toolbarHidden = true
     }
@@ -47,7 +56,7 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         setFilterBySearch(searchText)
     }
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        setFilterBySearch(searchBar.text)
+        //setFilterBySearch(searchBar.text)
         searchBar.resignFirstResponder()
     }
     
@@ -59,15 +68,26 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         return section.numberOfObjects
     }
     
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        performSegueWithIdentifier("editRecipe", sender: indexPath)
+        println("did Selected \(indexPath.row)")
+
+    }
+
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("recipecell", forIndexPath: indexPath) as RecipeCell
         configureCell(cell, atIndexPath: indexPath)
         return cell
     }
     
+
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
+    
+    
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             data?.removeFromFetchedResults(atIndexPath: indexPath)
@@ -124,6 +144,11 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
                 println("prepareForSegue no coords");
             }
         
+        } else if segue.identifier == "editRecipe" {
+            let dst = segue.destinationViewController as AddNewRecipeController
+            let object = data?.fetchedResultsController.objectAtIndexPath(sender as NSIndexPath) as NSManagedObject
+            
+            dst.recipeManagedObject = object
         }
     }
  

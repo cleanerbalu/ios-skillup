@@ -65,20 +65,22 @@ class ModelRecipes {
         
     }
     
+    func removeSavedFile(object: NSManagedObject) {
+        if let obj: AnyObject = object.valueForKey("imageLocation") {
+            let filePath = "\(glPicturePath)/\(obj.description)"
+            var error: NSError?
+            if NSFileManager.defaultManager().removeItemAtPath(filePath, error: &error) {
+                //println("File removed \(filePath)")
+            } else {
+                println("Error remove file: \(error!.localizedDescription)")
+            }
+        }
+    }
     
     func removeFromFetchedResults(atIndexPath indexPath: NSIndexPath) {
         if _fetchedResultsController != nil {
             let object = _fetchedResultsController?.objectAtIndexPath(indexPath) as NSManagedObject
-            if let obj: AnyObject = object.valueForKey("imageLocation") {
-                let filePath = "\(glPicturePath)/\(obj.description)"
-                var error: NSError?
-                if NSFileManager.defaultManager().removeItemAtPath(filePath, error: &error) {
-                    //println("File removed \(filePath)")
-                } else {
-                    println("Error remove file: \(error!.localizedDescription)")
-                }
-                
-            }
+            removeSavedFile(object)
             managedObjectContext?.deleteObject(object)
             saveContext()
         }
@@ -167,35 +169,50 @@ class ModelRecipes {
     
 
     
-    func insertNewObject(recipe: recipeDataType) {
+    func insertNewOrEditObject(object: NSManagedObject?, recipe: recipeDataType, imageChanged: Bool) {
         let context = fetchedResultsController.managedObjectContext
-        //let entity = fetchedResultsController.fetchRequest.entity!
-        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName("TheRecipe", inManagedObjectContext: context) as NSManagedObject
-        
         var fileName: String? = nil
-        if recipe.image != nil {
+        var newManagedObject: NSManagedObject? = nil
+        var updateImage = true
+        
+        if let obj = object {
+            println("edit object")
+            if imageChanged {
+                removeSavedFile(obj)
+            } else {
+                updateImage = false
+            }
+            newManagedObject = obj
+        } else {
+            newManagedObject = NSEntityDescription.insertNewObjectForEntityForName("TheRecipe", inManagedObjectContext: context) as? NSManagedObject
+        }
+        
+        
+        if recipe.image != nil && imageChanged {
             var imageData = UIImagePNGRepresentation(recipe.image)
             let fileManager = NSFileManager.defaultManager()
             let uuid = NSUUID().UUIDString
             fileName = "recipe\(uuid).png"
             let filePathToWrite = "\(glPicturePath)/\(fileName!)"
             fileManager.createFileAtPath(filePathToWrite, contents: imageData, attributes: nil)
-            //println("insertNewObject \(filePathToWrite)")
+        } else {
+            
         }
+        
         var locPresent = false
         if let theCoord = recipe.coords {
-            newManagedObject.setValue(recipe.coords?.longitude, forKey: "crdLon")
-            newManagedObject.setValue(recipe.coords?.latitude, forKey: "crdLat")
+            newManagedObject?.setValue(recipe.coords?.longitude, forKey: "crdLon")
+            newManagedObject?.setValue(recipe.coords?.latitude, forKey: "crdLat")
             locPresent = true
             //println("modelrecipe coord saved")
         }
-        newManagedObject.setValue(locPresent, forKey: "isLocationPresent")
+        newManagedObject?.setValue(locPresent, forKey: "isLocationPresent")
         
-        // If appropriate, configure the new managed object.
-        // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-        newManagedObject.setValue(recipe.shortDescribtion, forKey: "shortDescr")
-        newManagedObject.setValue(recipe.preparation, forKey: "preparation")
-        newManagedObject.setValue(fileName, forKey: "imageLocation")
+        newManagedObject?.setValue(recipe.shortDescribtion, forKey: "shortDescr")
+        newManagedObject?.setValue(recipe.preparation, forKey: "preparation")
+        if updateImage {
+            newManagedObject?.setValue(fileName, forKey: "imageLocation")
+        }
         
         // Save the context.
         var error: NSError? = nil

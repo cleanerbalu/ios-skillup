@@ -9,7 +9,7 @@
         <!--MapView-->
         <scene sceneID="Off-3m-4HJ">
             <objects>
-                <viewController title="Place where you created the recipe" id="9ig-7j-IYt" userLabel="MapView" customClass="MapViewController" customModule="Recipes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Inspiration place" id="9ig-7j-IYt" userLabel="MapView" customClass="MapViewController" customModule="Recipes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="K1m-XA-q2x"/>
                         <viewControllerLayoutGuide type="bottom" id="itI-Mw-dJK"/>
@@ -43,7 +43,7 @@
         <scene sceneID="UFM-Uq-1ue">
             <objects>
                 <tableViewController id="kcp-n9-53E" customClass="MyViewController" customModule="Recipes" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="145" sectionHeaderHeight="22" sectionFooterHeight="22" id="1Ys-xb-eOi">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="145" sectionHeaderHeight="22" sectionFooterHeight="22" id="1Ys-xb-eOi">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -128,6 +128,7 @@
                         <outlet property="searchBar" destination="nS9-AV-ZaZ" id="Mxs-q8-52E"/>
                         <segue destination="nCT-Lw-Zl4" kind="show" identifier="addRecipe" id="olp-W3-4pZ"/>
                         <segue destination="9ig-7j-IYt" kind="show" identifier="location" id="w6R-Qv-bE5"/>
+                        <segue destination="nCT-Lw-Zl4" kind="show" identifier="editRecipe" id="Kdf-G1-8aO"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QgJ-VI-AJb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -402,4 +403,7 @@
         <image name="Unknown.jpg" width="225" height="225"/>
         <image name="location.png" width="30" height="36"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Kdf-G1-8aO"/>
+    </inferredMetricsTieBreakers>
 </document>

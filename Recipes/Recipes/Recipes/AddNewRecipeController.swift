@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreLocation
 import MapKit
+import CoreData
 
 class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,CLLocationManagerDelegate, UITextFieldDelegate {
     @IBOutlet weak var lblDescription: UITextField?
@@ -21,8 +22,9 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
     var timer: NSTimer? = nil
     var recipeModel = ModelRecipes()
     var locManager: CLLocationManager?
-    
+    var recipeManagedObject: NSManagedObject? = nil
     var currentCoord: CLLocationCoordinate2D? = nil
+    var imageChanged: Bool = false
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -67,15 +69,26 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         }
         
         lblDescription?.delegate = self
-        
+        fillFormFromManangedObject(recipeManagedObject)
 
     }
     
-
-    
+    func fillFormFromManangedObject(dataObject: NSManagedObject?){
+        if let object = dataObject {
+            lblDescription!.text = object.valueForKey("shortDescr")!.description
+            txtPreparation!.text = object.valueForKey("preparation")!.description
+            
+            if let obj: AnyObject = object.valueForKey("imageLocation") {
+                if obj.description != nil {
+                    theImage?.image = UIImage(contentsOfFile: "\(glPicturePath)/\(obj.description)")
+                }
+            }
+        }
+    }
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.toolbarHidden = false
+         //fillFormFromManangedObject(object)
     }
     
     
@@ -145,7 +158,7 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
             let alrt = UIAlertView(title: "Error", message: "Please specify preparation", delegate: nil, cancelButtonTitle: "Ok")
             alrt.show()
         } else {
-            recipeModel.insertNewObject(ModelRecipes.recipeDataType(shortDescribtion: descr, preparation: prep , image: theImage?.image,coords: currentCoord ))
+            recipeModel.insertNewOrEditObject(recipeManagedObject,recipe: ModelRecipes.recipeDataType(shortDescribtion: descr, preparation: prep , image: theImage?.image,coords: currentCoord ),imageChanged: imageChanged)
             lblDescription?.text = ""
             txtPreparation?.text = ""
             theImage?.image = nil
@@ -174,7 +187,6 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         } else if segue.identifier == "notes" {
                 let dst = segue.destinationViewController as MyNoteViewController
                 dst.addRecipeController = self
-                //dst.theNote.text = txtPreparation?.text
         }
     }
     
@@ -199,12 +211,13 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
     
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         println("didFinishPickingImage")
-        theImage?.image = image
+        takeDrawenImage(image)
         picker.dismissViewControllerAnimated(true, completion: nil)
      }
     
     func takeDrawenImage(img: UIImage){
         theImage?.image = img
+        imageChanged = true
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
