@@ -11,6 +11,8 @@ import UIKit
 import CoreLocation
 import MapKit
 import CoreData
+import AVFoundation
+import Photos
 
 class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,CLLocationManagerDelegate, UITextFieldDelegate {
     @IBOutlet weak var lblDescription: UITextField?
@@ -141,7 +143,7 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
     
     func tapListener(gesture: UITapGestureRecognizer){
         if gesture.state == UIGestureRecognizerState.Ended {
-            takePicture(UIImagePickerControllerSourceType.Camera)
+            takePicture()
         }
         
     }
@@ -166,16 +168,61 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         }
     }
     
+    func isCameraAvaliable() -> Bool {
+        var res =  false
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            let avstatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
+            switch (avstatus) {
+            case AVAuthorizationStatus.Authorized:
+                res = true
+            case AVAuthorizationStatus.NotDetermined:
+                AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo, completionHandler: {res = $0 })
+            default:
+                break
+            }
+        }
+        return res
+    }
+    
+    func isPhotoLibraryAvailabel() -> Bool {
+        var res = false
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
+            let authStatus = PHPhotoLibrary.authorizationStatus()
+            switch authStatus {
+            case PHAuthorizationStatus.Authorized:
+                res = true
+            case PHAuthorizationStatus.NotDetermined:
+                PHPhotoLibrary.requestAuthorization({ res = ($0 == PHAuthorizationStatus.Authorized) })
+            default:
+                break
+            }
+        }
+        return res
+    }
+    
+    
+    func takePicture(){
+        if isCameraAvaliable() {
+            takePicture(UIImagePickerControllerSourceType.Camera)
+        } else if isPhotoLibraryAvailabel() {
+            takePicture(UIImagePickerControllerSourceType.PhotoLibrary)
+        } else {
+            self.performSegueWithIdentifier("draw", sender: self)
+        }
+        
+    }
     @IBAction func getPicture(sender: UIBarButtonItem) {
         switch sender.tag {
         case 0:
            takePicture(UIImagePickerControllerSourceType.Camera)
         case 1:
             takePicture(UIImagePickerControllerSourceType.PhotoLibrary)
+            //PHPoto
+            //UIImagePickerController.
+            
         case 2:
             self.performSegueWithIdentifier("draw", sender: self)
-            break
-        default:
+          default:
             break
         }
         

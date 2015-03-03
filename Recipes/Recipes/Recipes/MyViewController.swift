@@ -10,7 +10,14 @@ import UIKit
 import CoreData
 import CoreLocation
 
-
+func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+    return UIColor(
+        red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+        green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+        blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+        alpha: CGFloat(1.0)
+    )
+}
 
 class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedResultsControllerDelegate,UISearchBarDelegate,UITableViewDelegate {
     var data: ModelRecipes?
@@ -83,10 +90,15 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("recipecell", forIndexPath: indexPath) as RecipeCell
         configureCell(cell, atIndexPath: indexPath)
+        print("Row ")
         if (indexPath.row % 2) == 0 {
-            cell.contentView.backgroundColor = UIColor(red: 0xCC, green: 0x66, blue: 0xCC, alpha: 1)
+            //println("Even \(indexPath.row)")
+            cell.backgroundColor = UIColorFromRGB(0xBBEEBB)
+            cell.contentView.backgroundColor = UIColorFromRGB(0xBBEEBB)
         } else {
-            cell.contentView.backgroundColor = UIColor(red: 0xFF, green: 0x99, blue: 0xFF, alpha: 1)
+            //println("Odd \(indexPath.row)")
+            cell.backgroundColor = UIColorFromRGB(0xCCFFCC)
+            cell.contentView.backgroundColor = UIColorFromRGB(0xCCFFCC)
         }
         return cell
     }
@@ -112,6 +124,7 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         if let obj: AnyObject = object.valueForKey("imageLocation") {
             if obj.description != nil {
                 recipeCell.theImage?.image = UIImage(contentsOfFile: "\(glPicturePath)/\(obj.description)")
+                //recipeCell.theImage?.layer.cornerRadius = 30
             }
         }
         if recipeCell.superview == self {

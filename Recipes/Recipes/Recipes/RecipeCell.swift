@@ -24,6 +24,12 @@ class RecipeCell: UITableViewCell {
         supView?.performSegueWithIdentifier("location", sender: self)
         
     }
-  
+    
+    override func willMoveToSuperview(newSuperview: UIView?) {
+        theImage?.layer.masksToBounds = true
+        theImage?.layer.cornerRadius = 10
+        locButton.layer.masksToBounds = true
+        locButton.layer.cornerRadius = 2
+    }
 
 }
