@@ -83,6 +83,11 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("recipecell", forIndexPath: indexPath) as RecipeCell
         configureCell(cell, atIndexPath: indexPath)
+        if (indexPath.row % 2) == 0 {
+            cell.contentView.backgroundColor = UIColor(red: 0xCC, green: 0x66, blue: 0xCC, alpha: 1)
+        } else {
+            cell.contentView.backgroundColor = UIColor(red: 0xFF, green: 0x99, blue: 0xFF, alpha: 1)
+        }
         return cell
     }
     
@@ -102,7 +107,7 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         let object = data?.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject
         let recipeCell = cell as RecipeCell
         recipeCell.lblDescription!.text = object.valueForKey("shortDescr")!.description
-        recipeCell.txtPreparation!.text = object.valueForKey("preparation")!.description
+        //recipeCell.txtPreparation!.text = object.valueForKey("preparation")!.description
         
         if let obj: AnyObject = object.valueForKey("imageLocation") {
             if obj.description != nil {

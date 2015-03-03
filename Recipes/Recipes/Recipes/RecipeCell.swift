@@ -12,7 +12,7 @@ import CoreLocation
 
 class RecipeCell: UITableViewCell {
     @IBOutlet var lblDescription: UILabel?
-    @IBOutlet var txtPreparation: UITextView?
+    //@IBOutlet var txtPreparation: UITextView?
     @IBOutlet var theImage: UIImageView?
     weak var supView: MyViewController?
     var coords: CLLocationCoordinate2D? = nil
