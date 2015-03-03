@@ -25,7 +25,7 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         
     
         let tap = UITapGestureRecognizer(target: self, action: "onTap:")
-        tableView.addGestureRecognizer(tap)
+        //tableView.addGestureRecognizer(tap)
         
         println(NSStringFromClass(self.dynamicType))
         
@@ -70,9 +70,13 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
     
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("editRecipe", sender: indexPath)
-        println("did Selected \(indexPath.row)")
-
+        if searchBar.isFirstResponder() {
+            println("searchbar is first responder")
+            searchBar.resignFirstResponder()
+        } else {
+            performSegueWithIdentifier("editRecipe", sender: indexPath)
+            println("did Selected \(indexPath.row)")
+        }
     }
 
     
