@@ -325,31 +325,30 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems>
-                        <barButtonItem systemItem="add" id="BfD-ck-kdJ">
+                        <barButtonItem title="+" id="com-HL-Mgp">
                             <connections>
-                                <action selector="incLine:" destination="Jg5-u9-bq0" id="e2C-E3-Y9M"/>
+                                <action selector="incLine:" destination="Jg5-u9-bq0" id="mzc-Do-Vb7"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem title="2" id="TiU-uT-AWS"/>
-                        <barButtonItem title="-" style="plain" id="ADm-44-ldX">
+                        <barButtonItem title="-" id="NAC-ds-0hX">
                             <connections>
-                                <action selector="decLine:" destination="Jg5-u9-bq0" id="Ti5-fR-FVW"/>
+                                <action selector="decLine:" destination="Jg5-u9-bq0" id="c2h-MU-Plz"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="uTw-Nw-T1P"/>
-                        <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="AGQ-mq-7hI"/>
                         <barButtonItem title="Colors" style="plain" id="N6Q-FN-2u9">
                             <connections>
                                 <action selector="colorsPicker:" destination="Jg5-u9-bq0" id="SNJ-dz-Uwb"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="SD3-rG-6Pb"/>
+                        <barButtonItem width="30" style="plain" systemItem="fixedSpace" id="SD3-rG-6Pb"/>
                         <barButtonItem systemItem="trash" id="JxK-Aj-EDg">
                             <connections>
                                 <action selector="clearPicture:" destination="Jg5-u9-bq0" id="9wz-rk-fwm"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="LA7-Hy-7Hg"/>
+                        <barButtonItem width="30" style="plain" systemItem="fixedSpace" id="LA7-Hy-7Hg"/>
                         <barButtonItem systemItem="undo" id="zqC-7G-UyR">
                             <connections>
                                 <action selector="undoLastLine:" destination="Jg5-u9-bq0" id="5Vy-BW-Nqs"/>

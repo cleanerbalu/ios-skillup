@@ -54,9 +54,7 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
                 locMan.desiredAccuracy = kCLLocationAccuracyBest
                 
                 if locMan.respondsToSelector("requestWhenInUseAuthorization") {
-                    
                     locMan.requestWhenInUseAuthorization()
-                    println("realy did requestWhenInUseAuthorization")
                 } else {
                     println("no respond on requestWhenInUseAuthorization")
                 }
@@ -90,18 +88,14 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.toolbarHidden = false
-         //fillFormFromManangedObject(object)
     }
-    
-    
-  
     
     func turnOnLocation (){
         if let locMan = locManager {
             locMan.startUpdatingLocation()
         }
-        
     }
+    
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         println("locationManager coord saved")
         currentCoord = (locations[locations.count-1] as CLLocation).coordinate
@@ -134,9 +128,8 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
        timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "turnOnLocation", userInfo: nil, repeats: false)
         
     }
-    func locationManager(manager: CLLocationManager!, didUpdateHeading newHeading: CLHeading!) {
-        println("got heading update")
-    }
+
+    
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
         println(error)
     }
@@ -154,7 +147,7 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         if let data = txtPreparation?.text { prep = data }
         
         if descr.isEmpty {
-            let alrt = UIAlertView(title: "Error", message: "Please specify short description", delegate: nil, cancelButtonTitle: "Ok")
+            let alrt = UIAlertView(title: "Error", message: "Please specify title", delegate: nil, cancelButtonTitle: "Ok")
             alrt.show()
         } else if prep.isEmpty {
             let alrt = UIAlertView(title: "Error", message: "Please specify preparation", delegate: nil, cancelButtonTitle: "Ok")
@@ -217,9 +210,6 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
            takePicture(UIImagePickerControllerSourceType.Camera)
         case 1:
             takePicture(UIImagePickerControllerSourceType.PhotoLibrary)
-            //PHPoto
-            //UIImagePickerController.
-            
         case 2:
             self.performSegueWithIdentifier("draw", sender: self)
           default:
@@ -238,8 +228,7 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     override func viewWillDisappear(animated: Bool) {
-        println("AddNewReciprContr will disapear")
-        locManager?.stopUpdatingLocation()
+          locManager?.stopUpdatingLocation()
         locManager?.stopUpdatingHeading()
         timer?.invalidate()
     }
@@ -257,7 +246,6 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
-        println("didFinishPickingImage")
         takeDrawenImage(image)
         picker.dismissViewControllerAnimated(true, completion: nil)
      }

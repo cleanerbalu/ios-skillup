@@ -83,8 +83,12 @@ class MyDrawView: UIView {
         self.setNeedsDisplay()
     }
     
+    
+    func setLineSize(width:Float) {
+        currentWidth = width
+    }
     func increaseLine(){
-        if currentWidth<15  {
+        if currentWidth<20  {
             currentWidth++
         }
         

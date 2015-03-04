@@ -12,10 +12,32 @@ class MyDrawViewController: UIViewController,NEOColorPickerViewControllerDelegat
     
     @IBOutlet weak var linewidth: UIBarButtonItem!
     
+    override func viewDidLoad() {
+       /* let ui = UIStepper()
+        ui.transform = CGAffineTransformMakeScale(0.8, 0.8)
+        ui.autorepeat = true
+        ui.maximumValue = 20
+        ui.minimumValue = 1
+        ui.stepValue = 2
+        ui.addTarget(self, action: "stepperValue:", forControlEvents: UIControlEvents.ValueChanged)
+        
+        ui.addConstraint(NSLayoutConstraint(item: self., attribute: <#NSLayoutAttribute#>, relatedBy: <#NSLayoutRelation#>, toItem: <#AnyObject?#>, attribute: <#NSLayoutAttribute#>, multiplier: <#CGFloat#>, constant: <#CGFloat#>))
+        let barbut = UIBarButtonItem(customView: ui)
+        
+        
+        self.toolbarItems?.insert(barbut, atIndex: 0)
+*/
+
+    }
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.toolbarHidden = false
     }
     
+    func stepperValue(stepper: UIStepper){
+        (view as MyDrawView).setLineSize(Float(stepper.value))
+        linewidth.title = String(Int((view as MyDrawView).getLine()))
+
+    }
     @IBAction func undoLastLine(sender: AnyObject) {
         (self.view as MyDrawView).undoLine()
     }

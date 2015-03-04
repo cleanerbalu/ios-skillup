@@ -52,7 +52,6 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func setFilterBySearch(text: String?){
@@ -63,7 +62,6 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         setFilterBySearch(searchText)
     }
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        //setFilterBySearch(searchBar.text)
         searchBar.resignFirstResponder()
     }
     
@@ -78,11 +76,9 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if searchBar.isFirstResponder() {
-            println("searchbar is first responder")
             searchBar.resignFirstResponder()
         } else {
             performSegueWithIdentifier("editRecipe", sender: indexPath)
-            println("did Selected \(indexPath.row)")
         }
     }
 
@@ -90,13 +86,10 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("recipecell", forIndexPath: indexPath) as RecipeCell
         configureCell(cell, atIndexPath: indexPath)
-        print("Row ")
         if (indexPath.row % 2) == 0 {
-            //println("Even \(indexPath.row)")
             cell.backgroundColor = UIColorFromRGB(0xBBEEBB)
             cell.contentView.backgroundColor = UIColorFromRGB(0xBBEEBB)
         } else {
-            //println("Odd \(indexPath.row)")
             cell.backgroundColor = UIColorFromRGB(0xCCFFCC)
             cell.contentView.backgroundColor = UIColorFromRGB(0xCCFFCC)
         }
@@ -124,7 +117,6 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         if let obj: AnyObject = object.valueForKey("imageLocation") {
             if obj.description != nil {
                 recipeCell.theImage?.image = UIImage(contentsOfFile: "\(glPicturePath)/\(obj.description)")
-                //recipeCell.theImage?.layer.cornerRadius = 30
             }
         }
         if recipeCell.superview == self {
@@ -157,15 +149,10 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "location" {
-            println("Prepare segue")
             let dst = segue.destinationViewController as MapViewController
             if let recpcell = sender as? RecipeCell {
                 dst.coord = recpcell.coords
-                println("prepareForSegue coords is here");
-            } else {
-                println("prepareForSegue no coords");
-            }
-        
+            }         
         } else if segue.identifier == "editRecipe" {
             let dst = segue.destinationViewController as AddNewRecipeController
             let object = data?.fetchedResultsController.objectAtIndexPath(sender as NSIndexPath) as NSManagedObject
