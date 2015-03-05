@@ -21,7 +21,6 @@ class ModelRecipes {
     struct recipeDataType {
         var shortDescribtion: String? = nil
         var preparation: String? = nil
-        //var imageLocation: String? = nil
         var image: UIImage? = nil
         var coords: CLLocationCoordinate2D? = nil
     }
@@ -60,7 +59,6 @@ class ModelRecipes {
             managedObjectContext?.persistentStoreCoordinator = persistentStoreCoordinator
             
             NSFetchedResultsController.deleteCacheWithName("Master")
-            //println("modelrecipe init done")
         }
         
     }
@@ -84,13 +82,9 @@ class ModelRecipes {
             managedObjectContext?.deleteObject(object)
             saveContext()
         }
-        
     }
     
     func fetch() ->[NSManagedObject]? {
-        
-        //managedObjectContext?.executeFetchRequest(<#request: NSFetchRequest#>, error: <#NSErrorPointer#>)
-        
         let fetchReq = NSFetchRequest(entityName: "TheRecipe")
         var error: NSError?
         let fetchResults = managedObjectContext?.executeFetchRequest(fetchReq, error: &error ) as [NSManagedObject]?
@@ -132,6 +126,7 @@ class ModelRecipes {
             
         }
     }
+    
     var fetchedResultsController: NSFetchedResultsController {
         if _fetchedResultsController != nil {
             return _fetchedResultsController!
@@ -144,7 +139,7 @@ class ModelRecipes {
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "shortDescr", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: "shortDescr", ascending: true)
         let sortDescriptors = [sortDescriptor]
         fetchRequest.sortDescriptors = [sortDescriptor]
         
@@ -166,8 +161,6 @@ class ModelRecipes {
         
         return _fetchedResultsController!
     }
-    
-
     
     func insertNewOrEditObject(object: NSManagedObject?, recipe: recipeDataType, imageChanged: Bool) {
         let context = fetchedResultsController.managedObjectContext
@@ -224,8 +217,6 @@ class ModelRecipes {
         }
     }
 
-    
-    
     func saveContext () {
         if let moc = managedObjectContext {
             var error: NSError? = nil

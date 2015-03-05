@@ -99,7 +99,6 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         println("locationManager coord saved")
         currentCoord = (locations[locations.count-1] as CLLocation).coordinate
-        
         if mapUserLoc.superview != nil {
             mapUserLoc.setRegion(MKCoordinateRegionMakeWithDistance(currentCoord!, 1000, 1000), animated: true)
             let annot = MKPointAnnotation()
@@ -109,7 +108,6 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
             println("Annotation done")
         
         }
-        
         if locationDetected.superview != nil {
             UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: CGFloat(0.3), initialSpringVelocity: CGFloat(3.0), options: UIViewAnimationOptions.CurveEaseInOut, animations: {
                     self.locationDetected.hidden = false
@@ -123,10 +121,8 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
                 }
             )
         }
-
        manager.stopUpdatingLocation()
        timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "turnOnLocation", userInfo: nil, repeats: false)
-        
     }
 
     
@@ -136,9 +132,20 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
     
     func tapListener(gesture: UITapGestureRecognizer){
         if gesture.state == UIGestureRecognizerState.Ended {
-            takePicture()
-        }
-        
+            let pos = gesture.locationInView(theImage)
+            if pos.y > theImage!.frame.height/2 {
+            
+                let alert = UIAlertController(title: "Image", message: "Select source", preferredStyle: UIAlertControllerStyle.ActionSheet)
+                alert.addAction(UIAlertAction(title: "Camera", style: UIAlertActionStyle.Destructive, handler: { (alert:UIAlertAction!) in self.takePicture(0) }))
+                alert.addAction(UIAlertAction(title: "Photo Libary", style: UIAlertActionStyle.Destructive, handler: { (alert:UIAlertAction!) in self.takePicture(1) }))
+                alert.addAction(UIAlertAction(title: "Draw myself", style: UIAlertActionStyle.Destructive, handler: { (alert:UIAlertAction!) in self.takePicture(2) }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (alert:UIAlertAction!) in return }))
+                self.presentViewController(alert, animated: true, completion: nil)
+                
+            } else {
+                takePicture()
+            }
+       }
     }
     @IBAction func SaveData(sender: AnyObject) {
         var descr = ""
@@ -204,17 +211,34 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         }
         
     }
-    @IBAction func getPicture(sender: UIBarButtonItem) {
-        switch sender.tag {
+    
+    func takePicture(source: UIImagePickerControllerSourceType) {
+        if (UIImagePickerController.isSourceTypeAvailable(source)) {
+            let impick = UIImagePickerController()
+            impick.sourceType = source
+            impick.delegate = self
+            self.presentViewController(impick, animated: true, completion: nil)
+        } else {
+            let alrt = UIAlertView(title: "Error", message: "No Camera", delegate: nil, cancelButtonTitle: "კაი რას იზავ!")
+            alrt.show()
+        }
+    }
+    
+    func takePicture(sourceType: Int) {
+        switch sourceType {
         case 0:
-           takePicture(UIImagePickerControllerSourceType.Camera)
+            takePicture(UIImagePickerControllerSourceType.Camera)
         case 1:
             takePicture(UIImagePickerControllerSourceType.PhotoLibrary)
         case 2:
             self.performSegueWithIdentifier("draw", sender: self)
-          default:
+        default:
             break
         }
+    }
+    
+    @IBAction func getPicture(sender: UIBarButtonItem) {
+        takePicture(sender.tag)
         
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -233,17 +257,7 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         timer?.invalidate()
     }
     
-    func takePicture(source: UIImagePickerControllerSourceType) {
-        if (UIImagePickerController.isSourceTypeAvailable(source)) {
-            let impick = UIImagePickerController()
-            impick.sourceType = source
-            impick.delegate = self
-            self.presentViewController(impick, animated: true, completion: nil)
-        } else {
-            let alrt = UIAlertView(title: "Error", message: "No Camera", delegate: nil, cancelButtonTitle: "კაი რას იზავ!")
-            alrt.show()
-        }
-    }
+    
     
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         takeDrawenImage(image)
