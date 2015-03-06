@@ -23,7 +23,7 @@
 		6224F8BA1A9F4D6100BE6833 /* NEOColorPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6224F8AD1A9F4D6100BE6833 /* NEOColorPickerViewController.xib */; };
 		6224F8BB1A9F4D6100BE6833 /* UIColor+NEOColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6224F8AF1A9F4D6100BE6833 /* UIColor+NEOColor.m */; };
 		623414931A8FA106001426BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623414921A8FA106001426BE /* AppDelegate.swift */; };
-		623414951A8FA106001426BE /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623414941A8FA106001426BE /* MyViewController.swift */; };
+		623414951A8FA106001426BE /* RListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623414941A8FA106001426BE /* RListViewController.swift */; };
 		623414981A8FA106001426BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 623414961A8FA106001426BE /* Main.storyboard */; };
 		6234149D1A8FA106001426BE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6234149B1A8FA106001426BE /* LaunchScreen.xib */; };
 		623414A91A8FA106001426BE /* RecipesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623414A81A8FA106001426BE /* RecipesTests.swift */; };
@@ -84,7 +84,7 @@
 		6234148D1A8FA106001426BE /* Recipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		623414911A8FA106001426BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		623414921A8FA106001426BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		623414941A8FA106001426BE /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
+		623414941A8FA106001426BE /* RListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RListViewController.swift; sourceTree = "<group>"; };
 		623414971A8FA106001426BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6234149C1A8FA106001426BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		623414A21A8FA106001426BE /* RecipesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,7 +192,7 @@
 				623414921A8FA106001426BE /* AppDelegate.swift */,
 				62B72F011A9F568C00B4824B /* MyDrawViewController.swift */,
 				6287E0C71A9B60AF002E34FB /* MyDrawView.swift */,
-				623414941A8FA106001426BE /* MyViewController.swift */,
+				623414941A8FA106001426BE /* RListViewController.swift */,
 				62FE66DF1AA080B50063F976 /* MyNoteViewController.swift */,
 				62FC9D1D1A9B461800A28FDA /* MapViewController.swift */,
 				62ADC1221A93A7E8005C7167 /* AddNewRecipeController.swift */,
@@ -355,7 +355,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				623414951A8FA106001426BE /* MyViewController.swift in Sources */,
+				623414951A8FA106001426BE /* RListViewController.swift in Sources */,
 				6224F8B71A9F4D6100BE6833 /* NEOColorPickerHueGridViewController.m in Sources */,
 				623414931A8FA106001426BE /* AppDelegate.swift in Sources */,
 				6224F8B91A9F4D6100BE6833 /* NEOColorPickerViewController.m in Sources */,

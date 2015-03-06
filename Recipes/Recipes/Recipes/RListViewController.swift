@@ -11,42 +11,44 @@ import CoreData
 import CoreLocation
 
 func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+    return UIColorFromRGB(rgbValue,1.0)
+}
+
+func UIColorFromRGB(rgbValue: UInt, alpha: CGFloat) -> UIColor {
     return UIColor(
         red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
         green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
         blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-        alpha: CGFloat(1.0)
+        alpha: alpha
     )
 }
 
-class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedResultsControllerDelegate,UISearchBarDelegate,UITableViewDelegate {
+
+class RListViewController: UITableViewController,UITableViewDataSource,NSFetchedResultsControllerDelegate,UISearchBarDelegate,UITableViewDelegate {
     var data: ModelRecipes?
     
+    var sortButtonDesc: UIBarButtonItem?
+    var sortButtonAsc: UIBarButtonItem?
+    
     @IBOutlet weak var searchBar: UISearchBar!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         data = ModelRecipes()
         data?.fetchedResultsController.delegate = self
         searchBar.delegate = self
-        
-    
-        let tap = UITapGestureRecognizer(target: self, action: "onTap:")
-        //tableView.addGestureRecognizer(tap)
-        
-        println(NSStringFromClass(self.dynamicType))
-        
+
         tableView.allowsSelection = true
         tableView.delegate = self
+
+        sortButtonDesc = UIBarButtonItem(title: "▼", style: UIBarButtonItemStyle.Plain, target: self, action: "setSortButtonEnabling:")
+        sortButtonAsc = UIBarButtonItem(title: "▲", style: UIBarButtonItemStyle.Plain, target: self, action: "setSortButtonEnabling:")
+        
+        setSortButtonEnabling(nil)
+        navigationItem.leftBarButtonItems = [sortButtonAsc!,sortButtonDesc!]
     }
-    
-    func onTap(event: UITapGestureRecognizer){
-        setFilterBySearch(searchBar.text)
-        searchBar.resignFirstResponder()
-    
-    }
-    
-    
+
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.toolbarHidden = true
     }
@@ -54,6 +56,10 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         super.didReceiveMemoryWarning()
     }
     
+    
+    
+    
+    /***************** SearchBar related  *****************/
     func setFilterBySearch(text: String?){
         data?.filterShortName = text
         tableView.reloadData()
@@ -64,16 +70,16 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
-    
+
+    /*****************   Table view delegates  *****************/
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return data?.fetchedResultsController.sections?.count ?? 0
     }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let section = data?.fetchedResultsController.sections![section] as NSFetchedResultsSectionInfo
         return section.numberOfObjects
     }
-    
-    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if searchBar.isFirstResponder() {
             searchBar.resignFirstResponder()
@@ -81,8 +87,6 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
             performSegueWithIdentifier("editRecipe", sender: indexPath)
         }
     }
-
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("recipecell", forIndexPath: indexPath) as RecipeCell
         configureCell(cell, atIndexPath: indexPath)
@@ -95,13 +99,9 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         }
         return cell
     }
-    
-
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
-    
-    
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             data?.removeFromFetchedResults(atIndexPath: indexPath)
@@ -112,17 +112,19 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
         let object = data?.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject
         let recipeCell = cell as RecipeCell
         recipeCell.lblDescription!.text = object.valueForKey("shortDescr")!.description
-        //recipeCell.txtPreparation!.text = object.valueForKey("preparation")!.description
+        println("Row \(indexPath.row) is \(recipeCell.lblDescription!.text)")
         
+        var setNoImage =  true
         if let obj: AnyObject = object.valueForKey("imageLocation") {
             if obj.description != nil {
                 recipeCell.theImage?.image = UIImage(contentsOfFile: "\(glPicturePath)/\(obj.description)")
+                setNoImage = false
             }
         }
-        if recipeCell.superview == self {
-            println("view are same")
-        }
         
+        if setNoImage {
+            recipeCell.theImage?.image = UIImage(named: "Unknown.jpg")
+        }
         
         recipeCell.locButton.hidden = true
         recipeCell.locButton.tag = indexPath.row
@@ -133,34 +135,15 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
                 recipeCell.coords = CLLocationCoordinate2D(
                     latitude: (object.valueForKey("crdLat") as NSNumber).doubleValue,
                     longitude: (object.valueForKey("crdLon") as NSNumber).doubleValue)
-                //println("configure cell coords \(recipeCell.coords?.latitude)")
-            } else {
+              } else {
                 recipeCell.coords = nil
             }
-            
         }
-        recipeCell.supView = self
+        recipeCell.superListView = self
     }
     
-    @IBAction func go2addRecipe(sender: AnyObject) {
-        self.performSegueWithIdentifier("addRecipe", sender: self)
-    }
+    /****************   NSFetchedResult delegates   **********************/
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "location" {
-            let dst = segue.destinationViewController as MapViewController
-            if let recpcell = sender as? RecipeCell {
-                dst.coord = recpcell.coords
-            }         
-        } else if segue.identifier == "editRecipe" {
-            let dst = segue.destinationViewController as AddNewRecipeController
-            let object = data?.fetchedResultsController.objectAtIndexPath(sender as NSIndexPath) as NSManagedObject
-            
-            dst.recipeManagedObject = object
-        }
-    }
- 
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         self.tableView.beginUpdates()
     }
@@ -175,7 +158,6 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
             return
         }
     }
-    
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         switch type {
         case .Insert:
@@ -191,14 +173,37 @@ class MyViewController: UITableViewController,UITableViewDataSource,NSFetchedRes
             return
         }
     }
-    
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
     }
 
     
+    /***************** Actions, Buttons ****************/
     
+    @IBAction func go2addRecipe(sender: AnyObject) {
+        self.performSegueWithIdentifier("addRecipe", sender: self)
+    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "location" {
+            let dst = segue.destinationViewController as MapViewController
+            if let recpcell = sender as? RecipeCell {
+                dst.coord = recpcell.coords
+            }
+        } else if segue.identifier == "editRecipe" {
+            let dst = segue.destinationViewController as AddNewRecipeController
+            let object = data?.fetchedResultsController.objectAtIndexPath(sender as NSIndexPath) as NSManagedObject
+            
+            dst.recipeManagedObject = object
+        }
+    }
     
-    
+    func setSortButtonEnabling(obj:AnyObject?){
+        data!.sortOrderAscending = !data!.sortOrderAscending
+        sortButtonAsc!.enabled = !data!.sortOrderAscending
+        sortButtonDesc!.enabled = data!.sortOrderAscending
+        tableView.reloadData()
+        
+    }
 }
 

@@ -30,6 +30,7 @@ class MyDrawView: UIView {
         color = UIColor.blackColor()
         super.init(coder: aDecoder)
     }
+    
     override func drawRect(rect: CGRect) {
         color.setStroke()
         for pict in myPicture {
@@ -52,7 +53,6 @@ class MyDrawView: UIView {
         currentPath?.myPath.lineWidth = CGFloat(currentWidth)
         self.setNeedsDisplay()
     }
-    
     override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
         let touch = touches.anyObject() as UITouch
         let pnt = touch.locationInView(self)
@@ -60,12 +60,14 @@ class MyDrawView: UIView {
         currentPath?.myPath.addLineToPoint(pnt)
         self.setNeedsDisplay()
     }
-    
     override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
          myPicture.append(currentPath!)
         currentPath = nil
         self.setNeedsDisplay()
     }
+    
+    
+    
     
     func setCurrentColor(newColor: UIColor){
         color = newColor
@@ -77,13 +79,10 @@ class MyDrawView: UIView {
             self.setNeedsDisplay()
         }
     }
-    
-    func clear() {
+     func clear() {
         myPicture = []
         self.setNeedsDisplay()
     }
-    
-    
     func setLineSize(width:Float) {
         currentWidth = width
     }
@@ -91,19 +90,17 @@ class MyDrawView: UIView {
         if currentWidth<20  {
             currentWidth++
         }
-        
     }
     func decreaseLine() {
         if currentWidth>1 {
             currentWidth--
         }
-        
     }
-    func getLine() -> Int {
+    func getLineWidth() -> Int {
         return Int(currentWidth)
     }
     
     func getCurrentColor() -> UIColor{
         return color
-     }
+    }
 }

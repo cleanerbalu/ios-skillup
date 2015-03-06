@@ -24,10 +24,6 @@ class MapViewController: UIViewController {
             annot.title = "Here did you the recipe"
             
             mapView.addAnnotation(annot)
-            println("Annotation done")
-            //let pin = MKPinAnnotationView(
-        } else  {
-            println("I don't have coordinates")
         }
     }
     

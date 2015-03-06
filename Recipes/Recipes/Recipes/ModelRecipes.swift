@@ -17,6 +17,8 @@ private var persistentStoreCoordinator: NSPersistentStoreCoordinator?
 private var appDelegate: UIApplicationDelegate?
 private var _fetchedResultsController: NSFetchedResultsController? = nil
 private var _filterShortName: String? = nil
+private var _sortOrderAsc = false
+
 class ModelRecipes {
     struct recipeDataType {
         var shortDescribtion: String? = nil
@@ -49,8 +51,6 @@ class ModelRecipes {
                 dict[NSLocalizedFailureReasonErrorKey] = failureReason
                 dict[NSUnderlyingErrorKey] = error
                 error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
-                // Replace this with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 NSLog("Unresolved error \(error), \(error!.userInfo)")
                 abort()
             }
@@ -62,6 +62,9 @@ class ModelRecipes {
         }
         
     }
+    
+    
+    
     
     func removeSavedFile(object: NSManagedObject) {
         if let obj: AnyObject = object.valueForKey("imageLocation") {
@@ -84,27 +87,37 @@ class ModelRecipes {
         }
     }
     
-    func fetch() ->[NSManagedObject]? {
-        let fetchReq = NSFetchRequest(entityName: "TheRecipe")
-        var error: NSError?
-        let fetchResults = managedObjectContext?.executeFetchRequest(fetchReq, error: &error ) as [NSManagedObject]?
-        if let results = fetchResults {
-            return results
-        } else {
-            println("error fetching results")
-            return nil
+    
+    private func rerequest() {
+        NSFetchedResultsController.deleteCacheWithName("Master")
+        var error: NSError? = nil
+        if !_fetchedResultsController!.performFetch(&error) {
+            abort()
         }
     }
-    
     private func getPredicate() -> NSPredicate? {
         var predicate: NSPredicate? = nil
-        
         if let shrtName = _filterShortName {
             if shrtName != "" {
                 predicate = NSPredicate(format: "shortDescr contains[c] %@", shrtName)
             }
         }
         return predicate
+    }
+    
+
+    var  sortOrderAscending: Bool {
+        get {
+            return  _sortOrderAsc
+        }
+        set {
+            _sortOrderAsc = newValue
+            if let fRC = _fetchedResultsController {
+                fRC.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "shortDescr", ascending: _sortOrderAsc)]
+                println(fRC.fetchRequest.sortDescriptors!)
+                rerequest()
+            }
+        }
     }
     var  filterShortName: String? {
         get{
@@ -113,19 +126,12 @@ class ModelRecipes {
         set {
             _filterShortName = newValue
             if let fRC = _fetchedResultsController {
-               
-                
                 fRC.fetchRequest.predicate = getPredicate()
-                
-                NSFetchedResultsController.deleteCacheWithName("Master")
-                var error: NSError? = nil
-                if !_fetchedResultsController!.performFetch(&error) {
-                    abort()
-                }
+                rerequest()
             }
-            
         }
     }
+    
     
     var fetchedResultsController: NSFetchedResultsController {
         if _fetchedResultsController != nil {
@@ -139,24 +145,20 @@ class ModelRecipes {
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "shortDescr", ascending: true)
-        let sortDescriptors = [sortDescriptor]
+        let sortDescriptor = NSSortDescriptor(key: "shortDescr", ascending: _sortOrderAsc)
+        
+        //let sortDescriptors = [sortDescriptor]
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         
         fetchRequest.predicate = getPredicate()
         
-        // Edit the section name key path and cache name if appropriate.
-        // nil for section name key path means "no sections".
         let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
         _fetchedResultsController = aFetchedResultsController
         
         var error: NSError? = nil
         if !_fetchedResultsController!.performFetch(&error) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            //println("Unresolved error \(error), \(error.userInfo)")
-            abort()
+             abort()
         }
         
         return _fetchedResultsController!
@@ -197,10 +199,8 @@ class ModelRecipes {
             newManagedObject?.setValue(recipe.coords?.longitude, forKey: "crdLon")
             newManagedObject?.setValue(recipe.coords?.latitude, forKey: "crdLat")
             locPresent = true
-            //println("modelrecipe coord saved")
         }
         newManagedObject?.setValue(locPresent, forKey: "isLocationPresent")
-        
         newManagedObject?.setValue(recipe.shortDescribtion, forKey: "shortDescr")
         newManagedObject?.setValue(recipe.preparation, forKey: "preparation")
         if updateImage {
@@ -210,9 +210,6 @@ class ModelRecipes {
         // Save the context.
         var error: NSError? = nil
         if !context.save(&error) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            //println("Unresolved error \(error), \(error.userInfo)")
             abort()
         }
     }

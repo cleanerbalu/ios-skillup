@@ -27,15 +27,16 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
     var recipeManagedObject: NSManagedObject? = nil
     var currentCoord: CLLocationCoordinate2D? = nil
     var imageChanged: Bool = false
+    
+    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         theImage?.backgroundColor = UIColor.lightGrayColor()
-        txtPreparation?.layer.cornerRadius = 20
+        txtPreparation?.layer.cornerRadius = 10
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: "tapListener:")
         tapGesture.numberOfTapsRequired = 1
-        //tapGesture.nu
-        self.theImage?.addGestureRecognizer(tapGesture)
+            self.theImage?.addGestureRecognizer(tapGesture)
         self.theImage?.userInteractionEnabled = true
         
         
@@ -44,34 +45,30 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         
         //location detection
         if CLLocationManager.locationServicesEnabled() {
-            println("locserv enabled")
             locManager = CLLocationManager()
-            
             if let locMan = locManager {
-                println("locManager is here")
                 locMan.delegate = self
-                
                 locMan.desiredAccuracy = kCLLocationAccuracyBest
-                
                 if locMan.respondsToSelector("requestWhenInUseAuthorization") {
                     locMan.requestWhenInUseAuthorization()
-                } else {
-                    println("no respond on requestWhenInUseAuthorization")
                 }
-                
                 locMan.startUpdatingLocation()
-                //locMan.startUpdatingHeading()
-            } else {
-                println("No locManager")
             }
-        } else {
-            println("locserv disabled")
         }
-        
         lblDescription?.delegate = self
         fillFormFromManangedObject(recipeManagedObject)
 
     }
+    override func viewWillDisappear(animated: Bool) {
+        locManager?.stopUpdatingLocation()
+        locManager?.stopUpdatingHeading()
+        timer?.invalidate()
+    }
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.toolbarHidden = false
+    }
+    
+    
     
     func fillFormFromManangedObject(dataObject: NSManagedObject?){
         if let object = dataObject {
@@ -85,33 +82,25 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
             }
         }
     }
-    
-    override func viewWillAppear(animated: Bool) {
-        self.navigationController?.toolbarHidden = false
-    }
-    
-    func turnOnLocation (){
+     func turnOnLocation (){
         if let locMan = locManager {
             locMan.startUpdatingLocation()
         }
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        println("locationManager coord saved")
         currentCoord = (locations[locations.count-1] as CLLocation).coordinate
+        return 
         if mapUserLoc.superview != nil {
             mapUserLoc.setRegion(MKCoordinateRegionMakeWithDistance(currentCoord!, 1000, 1000), animated: true)
             let annot = MKPointAnnotation()
             annot.setCoordinate(currentCoord!)
             annot.title = "Here did you the recipe"
             mapUserLoc.addAnnotation(annot)
-            println("Annotation done")
-        
         }
         if locationDetected.superview != nil {
             UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: CGFloat(0.3), initialSpringVelocity: CGFloat(3.0), options: UIViewAnimationOptions.CurveEaseInOut, animations: {
                     self.locationDetected.hidden = false
-                    //self.locationDetected.transform = CGAffineTransformMakeRotation(2*3.14)
                     self.locationDetected.transform = CGAffineTransformMakeScale(0.7, 0.7)//(2*3.14)
                 },
                 completion: { finished in
@@ -125,10 +114,11 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
        timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "turnOnLocation", userInfo: nil, repeats: false)
     }
 
-    
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
         println(error)
     }
+    
+    
     
     func tapListener(gesture: UITapGestureRecognizer){
         if gesture.state == UIGestureRecognizerState.Ended {
@@ -147,26 +137,10 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
             }
        }
     }
-    @IBAction func SaveData(sender: AnyObject) {
-        var descr = ""
-        var prep = ""
-        if let data = lblDescription?.text { descr = data }
-        if let data = txtPreparation?.text { prep = data }
-        
-        if descr.isEmpty {
-            let alrt = UIAlertView(title: "Error", message: "Please specify title", delegate: nil, cancelButtonTitle: "Ok")
-            alrt.show()
-        } else if prep.isEmpty {
-            let alrt = UIAlertView(title: "Error", message: "Please specify preparation", delegate: nil, cancelButtonTitle: "Ok")
-            alrt.show()
-        } else {
-            recipeModel.insertNewOrEditObject(recipeManagedObject,recipe: ModelRecipes.recipeDataType(shortDescribtion: descr, preparation: prep , image: theImage?.image,coords: currentCoord ),imageChanged: imageChanged)
-            lblDescription?.text = ""
-            txtPreparation?.text = ""
-            theImage?.image = nil
-            self.navigationController?.popViewControllerAnimated(true)
-        }
+    func inputPreparation(gesture: UITapGestureRecognizer) {
+        performSegueWithIdentifier("notes", sender: nil)
     }
+    
     
     func isCameraAvaliable() -> Bool {
         var res =  false
@@ -211,7 +185,6 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         }
         
     }
-    
     func takePicture(source: UIImagePickerControllerSourceType) {
         if (UIImagePickerController.isSourceTypeAvailable(source)) {
             let impick = UIImagePickerController()
@@ -223,7 +196,6 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
             alrt.show()
         }
     }
-    
     func takePicture(sourceType: Int) {
         switch sourceType {
         case 0:
@@ -236,28 +208,6 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
             break
         }
     }
-    
-    @IBAction func getPicture(sender: UIBarButtonItem) {
-        takePicture(sender.tag)
-        
-    }
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "draw" {
-                let dst = segue.destinationViewController as MyDrawViewController
-                dst.addRecipeViewController = self
-        } else if segue.identifier == "notes" {
-                let dst = segue.destinationViewController as MyNoteViewController
-                dst.addRecipeController = self
-        }
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-          locManager?.stopUpdatingLocation()
-        locManager?.stopUpdatingHeading()
-        timer?.invalidate()
-    }
-    
-    
     
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         takeDrawenImage(image)
@@ -274,8 +224,46 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         return false
     }
     
-    func inputPreparation(gesture: UITapGestureRecognizer) {
-        performSegueWithIdentifier("notes", sender: nil)
+
+    
+    
+    
+    /******************  Actions,Buttons **********************/
+    
+    @IBAction func getPicture(sender: UIBarButtonItem) {
+        takePicture(sender.tag)
+        
+    }
+
+    @IBAction func SaveData(sender: AnyObject) {
+        var descr = ""
+        var prep = ""
+        if let data = lblDescription?.text { descr = data }
+        if let data = txtPreparation?.text { prep = data }
+        
+        if descr.isEmpty {
+            let alrt = UIAlertView(title: "Error", message: "Please specify title", delegate: nil, cancelButtonTitle: "Ok")
+            alrt.show()
+        } else if prep.isEmpty {
+            let alrt = UIAlertView(title: "Error", message: "Please specify preparation", delegate: nil, cancelButtonTitle: "Ok")
+            alrt.show()
+        } else {
+            recipeModel.insertNewOrEditObject(recipeManagedObject,recipe: ModelRecipes.recipeDataType(shortDescribtion: descr, preparation: prep , image: theImage?.image,coords: currentCoord ),imageChanged: imageChanged)
+            lblDescription?.text = ""
+            txtPreparation?.text = ""
+            theImage?.image = nil
+            self.navigationController?.popViewControllerAnimated(true)
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "draw" {
+            let dst = segue.destinationViewController as MyDrawViewController
+            dst.addRecipeViewController = self
+        } else if segue.identifier == "notes" {
+            let dst = segue.destinationViewController as MyNoteViewController
+            dst.addRecipeController = self
+        }
     }
     
 }
