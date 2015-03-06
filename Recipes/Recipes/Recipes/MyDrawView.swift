@@ -42,7 +42,15 @@ class MyDrawView: UIView {
             cur.myPath.stroke()
         }
     }
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
     
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {
+        if motion == UIEventSubtype.MotionShake {
+            clear()
+        }
+    }
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         let touch = touches.anyObject() as UITouch
         let pnt = touch.locationInView(self)

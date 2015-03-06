@@ -219,10 +219,10 @@
                     </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="nS9-AV-ZaZ" id="Mxs-q8-52E"/>
-                        <segue destination="nCT-Lw-Zl4" kind="show" identifier="addRecipe2" id="olp-W3-4pZ"/>
+                        <segue destination="nCT-Lw-Zl4" kind="show" identifier="addRecipe" id="olp-W3-4pZ"/>
                         <segue destination="9ig-7j-IYt" kind="show" identifier="location" id="w6R-Qv-bE5"/>
                         <segue destination="nCT-Lw-Zl4" kind="show" identifier="editRecipe" id="Kdf-G1-8aO"/>
-                        <segue destination="Njd-tz-h3L" kind="show" identifier="addRecipe" id="cuy-dQ-w5o"/>
+                        <segue destination="Njd-tz-h3L" kind="show" identifier="addRecipe2" id="cuy-dQ-w5o"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QgJ-VI-AJb" userLabel="First Responder" sceneMemberID="firstResponder"/>
