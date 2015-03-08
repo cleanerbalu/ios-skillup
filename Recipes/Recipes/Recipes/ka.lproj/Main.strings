@@ -1,0 +1,42 @@
+
+/* Class = "IBUINavigationItem"; title = "Recipe List"; ObjectID = "29A-9H-vMv"; */
+"29A-9H-vMv.title" = "Recipe List";
+
+/* Class = "IBUILabel"; text = "How to prepare:"; ObjectID = "8Ge-6X-LPS"; */
+"8Ge-6X-LPS.text" = "How to prepare:";
+
+/* Class = "IBUIViewController"; title = "Inspiration place"; ObjectID = "9ig-7j-IYt"; */
+"9ig-7j-IYt.title" = "Inspiration place";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "CYX-R7-dPx"; */
+"CYX-R7-dPx.text" = "Label";
+
+/* Class = "IBUINavigationItem"; title = "Title"; ObjectID = "E5g-Nv-tOp"; */
+"E5g-Nv-tOp.title" = "Title";
+
+/* Class = "IBUITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "F36-iS-wY1"; */
+"F36-iS-wY1.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "IBUIBarButtonItem"; title = "Colors"; ObjectID = "N6Q-FN-2u9"; */
+"N6Q-FN-2u9.title" = "Colors";
+
+/* Class = "IBUIBarButtonItem"; title = "-"; ObjectID = "NAC-ds-0hX"; */
+"NAC-ds-0hX.title" = "-";
+
+/* Class = "IBUIBarButtonItem"; title = "2"; ObjectID = "TiU-uT-AWS"; */
+"TiU-uT-AWS.title" = "2";
+
+/* Class = "IBUINavigationItem"; title = "New recipe"; ObjectID = "cmJ-vL-StS"; */
+"cmJ-vL-StS.title" = "New recipe";
+
+/* Class = "IBUIBarButtonItem"; title = "+"; ObjectID = "com-HL-Mgp"; */
+"com-HL-Mgp.title" = "+";
+
+/* Class = "IBUILabel"; text = "Title:"; ObjectID = "g8Y-h7-078"; */
+"g8Y-h7-078.text" = "Title:";
+
+/* Class = "IBUILabel"; text = "Title:"; ObjectID = "jkQ-Ls-rxf"; */
+"jkQ-Ls-rxf.text" = "Title:";
+
+/* Class = "IBUILabel"; text = "Preparation:"; ObjectID = "ulI-9q-AoV"; */
+"ulI-9q-AoV.text" = "Preparation:";

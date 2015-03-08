@@ -27,7 +27,8 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
     var recipeManagedObject: NSManagedObject? = nil
     var currentCoord: CLLocationCoordinate2D? = nil
     var imageChanged: Bool = false
-    
+    var annot: MKPointAnnotation? = nil
+    var buttonCompass: UIBarButtonItem? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,10 +54,17 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
                     locMan.requestWhenInUseAuthorization()
                 }
                 locMan.startUpdatingLocation()
+                locMan.startUpdatingHeading()
+                
             }
         }
         lblDescription?.delegate = self
         fillFormFromManangedObject(recipeManagedObject)
+        
+        buttonCompass = UIBarButtonItem(title: "♂", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        buttonCompass!.enabled = false
+  
+        navigationItem.rightBarButtonItems?.append(buttonCompass!)
 
     }
     override func viewWillDisappear(animated: Bool) {
@@ -90,18 +98,20 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         currentCoord = (locations[locations.count-1] as CLLocation).coordinate
-        return 
+ 
         if mapUserLoc.superview != nil {
             mapUserLoc.setRegion(MKCoordinateRegionMakeWithDistance(currentCoord!, 1000, 1000), animated: true)
-            let annot = MKPointAnnotation()
-            annot.setCoordinate(currentCoord!)
-            annot.title = "Here did you the recipe"
-            mapUserLoc.addAnnotation(annot)
+            if annot == nil {
+                annot = MKPointAnnotation()
+            }
+            annot!.setCoordinate(currentCoord!)
+            annot!.title = NSLocalizedString("Here you are",  comment: "Annotation explanation")
+            mapUserLoc.addAnnotation(annot!)
         }
         if locationDetected.superview != nil {
             UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: CGFloat(0.3), initialSpringVelocity: CGFloat(3.0), options: UIViewAnimationOptions.CurveEaseInOut, animations: {
                     self.locationDetected.hidden = false
-                    self.locationDetected.transform = CGAffineTransformMakeScale(0.7, 0.7)//(2*3.14)
+                    self.locationDetected.transform = CGAffineTransformMakeScale(0.7, 0.7)
                 },
                 completion: { finished in
                      UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: CGFloat(0.3), initialSpringVelocity: CGFloat(3.0), options: UIViewAnimationOptions.CurveEaseInOut, animations: {
@@ -111,11 +121,30 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
             )
         }
        manager.stopUpdatingLocation()
-       timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "turnOnLocation", userInfo: nil, repeats: false)
+       timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "turnOnLocation", userInfo: nil, repeats: false)
     }
-
+    
+    func locationManager(manager: CLLocationManager!, didUpdateHeading newHeading: CLHeading!) {
+        /* not tested code due to absence of device!!! */
+        
+        let oldRad:Int = Int(arc4random_uniform(360))
+        let newRad = Int(arc4random_uniform(360))
+        
+        let theAnimation = CABasicAnimation(keyPath: "transform.rotation");
+        theAnimation.fromValue = oldRad;
+        theAnimation.toValue = newRad;
+        theAnimation.duration = 0.5;
+        
+        
+        let compsView = buttonCompass?.valueForKey("view") as UIView
+        compsView.layer.anchorPoint = CGPoint(x: 0.5,y: 0.5)
+        
+        UIView.beginAnimations("rotate",context: nil)
+        compsView.transform = CGAffineTransformMakeRotation(CGFloat(newRad));
+        UIView.commitAnimations()
+    }
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
-        println(error)
+        NSLog(error.description)
     }
     
     
@@ -124,14 +153,13 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         if gesture.state == UIGestureRecognizerState.Ended {
             let pos = gesture.locationInView(theImage)
             if pos.y > theImage!.frame.height/2 {
-            
-                let alert = UIAlertController(title: "Image", message: "Select source", preferredStyle: UIAlertControllerStyle.ActionSheet)
-                alert.addAction(UIAlertAction(title: "Camera", style: UIAlertActionStyle.Destructive, handler: { (alert:UIAlertAction!) in self.takePicture(0) }))
-                alert.addAction(UIAlertAction(title: "Photo Libary", style: UIAlertActionStyle.Destructive, handler: { (alert:UIAlertAction!) in self.takePicture(1) }))
-                alert.addAction(UIAlertAction(title: "Draw myself", style: UIAlertActionStyle.Destructive, handler: { (alert:UIAlertAction!) in self.takePicture(2) }))
-                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (alert:UIAlertAction!) in return }))
+           
+                let alert = UIAlertController(title:NSLocalizedString("Image",  comment: "aler ttitle") , message: NSLocalizedString("Select source",  comment: "alert message") , preferredStyle: UIAlertControllerStyle.ActionSheet)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("Camera",  comment: "camera button") , style: UIAlertActionStyle.Destructive, handler: { (alert:UIAlertAction!) in self.takePicture(0) }))
+                alert.addAction(UIAlertAction(title:  NSLocalizedString("Photo Libary",  comment: "library buitton") , style: UIAlertActionStyle.Destructive, handler: { (alert:UIAlertAction!) in self.takePicture(1) }))
+                alert.addAction(UIAlertAction(title: NSLocalizedString("Draw myself",  comment: "draw buitton"), style: UIAlertActionStyle.Destructive, handler: { (alert:UIAlertAction!) in self.takePicture(2) }))
+                alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel",  comment: "cancel buitton"), style: UIAlertActionStyle.Cancel, handler: { (alert:UIAlertAction!) in return }))
                 self.presentViewController(alert, animated: true, completion: nil)
-                
             } else {
                 takePicture()
             }
@@ -192,7 +220,9 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
             impick.delegate = self
             self.presentViewController(impick, animated: true, completion: nil)
         } else {
-            let alrt = UIAlertView(title: "Error", message: "No Camera", delegate: nil, cancelButtonTitle: "კაი რას იზავ!")
+            let alrt = UIAlertView(title:  NSLocalizedString("Error",  comment: "error"),
+                                    message: NSLocalizedString("No Camera",  comment: "No Camera"), delegate: nil,
+                                    cancelButtonTitle: NSLocalizedString("OK, no problem",  comment: "cancel buton"))
             alrt.show()
         }
     }
@@ -242,10 +272,15 @@ class AddNewRecipeController: UIViewController, UIImagePickerControllerDelegate,
         if let data = txtPreparation?.text { prep = data }
         
         if descr.isEmpty {
-            let alrt = UIAlertView(title: "Error", message: "Please specify title", delegate: nil, cancelButtonTitle: "Ok")
+            let alrt = UIAlertView(title: NSLocalizedString("Error",  comment: "error"),
+                                message: NSLocalizedString("Please specify title",  comment: "no title msg"),
+                                delegate: nil,
+                                cancelButtonTitle: NSLocalizedString("OK",  comment: "ok"))
             alrt.show()
         } else if prep.isEmpty {
-            let alrt = UIAlertView(title: "Error", message: "Please specify preparation", delegate: nil, cancelButtonTitle: "Ok")
+            let alrt = UIAlertView(title: NSLocalizedString("Error", comment: "error"),
+                                message: NSLocalizedString("Please specify preparation",  comment: "no recipe msg"), delegate: nil,
+                                cancelButtonTitle: NSLocalizedString("OK",  comment: "ok"))
             alrt.show()
         } else {
             recipeModel.insertNewOrEditObject(recipeManagedObject,recipe: ModelRecipes.recipeDataType(shortDescribtion: descr, preparation: prep , image: theImage?.image,coords: currentCoord ),imageChanged: imageChanged)

@@ -21,7 +21,7 @@ class MapViewController: UIViewController {
             mapView.setRegion(MKCoordinateRegionMakeWithDistance(crd, 1000, 1000), animated: true)
             let annot = MKPointAnnotation()
             annot.setCoordinate(crd)
-            annot.title = "Here did you the recipe"
+            annot.title = NSLocalizedString("Here did you the recipe",  comment: "Annotation explanation")
             
             mapView.addAnnotation(annot)
         }

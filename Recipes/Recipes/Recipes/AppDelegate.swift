@@ -20,16 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         var error: NSError?
         
-       // var paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
-        //var documentsDirectory: AnyObject = paths[0]
-        //var dataPath = documentsDirectory.stringByAppendingPathComponent(glFolderName)
-        
         
         let paths = NSFileManager.defaultManager().URLsForDirectory( .DocumentDirectory, inDomains: .UserDomainMask)
         let documentsDirectory = paths[paths.count-1] as NSURL
         glPicturePath = documentsDirectory.URLByAppendingPathComponent(glFolderName, isDirectory: true).path!
-  
-        println(glPicturePath)
+
         if !NSFileManager.defaultManager().fileExistsAtPath(glPicturePath) {
             NSFileManager.defaultManager().createDirectoryAtPath(glPicturePath, withIntermediateDirectories: false, attributes: nil, error: &error)
         }

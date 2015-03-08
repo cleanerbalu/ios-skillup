@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import CoreLocation
 
+
 func UIColorFromRGB(rgbValue: UInt) -> UIColor {
     return UIColorFromRGB(rgbValue,1.0)
 }
@@ -105,14 +106,12 @@ class RListViewController: UITableViewController,UITableViewDataSource,NSFetched
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             data?.removeFromFetchedResults(atIndexPath: indexPath)
-           
         }
     }
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let object = data?.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject
         let recipeCell = cell as RecipeCell
         recipeCell.lblDescription!.text = object.valueForKey("shortDescr")!.description
-        println("Row \(indexPath.row) is \(recipeCell.lblDescription!.text)")
         
         var setNoImage =  true
         if let obj: AnyObject = object.valueForKey("imageLocation") {
@@ -183,10 +182,11 @@ class RListViewController: UITableViewController,UITableViewDataSource,NSFetched
     @IBAction func go2addRecipe(sender: AnyObject) {
         self.performSegueWithIdentifier("addRecipe", sender: self)
     }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "location" {
-            let dst = segue.destinationViewController as MapViewController
+             let dst = segue.destinationViewController as MapViewController
             if let recpcell = sender as? RecipeCell {
                 dst.coord = recpcell.coords
             }
@@ -205,5 +205,7 @@ class RListViewController: UITableViewController,UITableViewDataSource,NSFetched
         tableView.reloadData()
         
     }
+    
+   
 }
 

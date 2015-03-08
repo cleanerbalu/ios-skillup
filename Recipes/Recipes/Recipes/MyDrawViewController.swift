@@ -20,7 +20,7 @@ class MyDrawViewController: UIViewController,NEOColorPickerViewControllerDelegat
         let color = NEOColorPickerViewController()
         color.delegate = self
         color.selectedColor = (view as MyDrawView).getCurrentColor()
-        color.title = "Choose color"
+        color.title = NSLocalizedString("Choose color", comment: "Color chooser title")
         self.navigationController?.toolbarHidden = true
         self.navigationController?.pushViewController(color, animated: true)
     }

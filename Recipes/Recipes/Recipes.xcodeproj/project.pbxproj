@@ -30,6 +30,7 @@
 		623414B31A8FA203001426BE /* ModelRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623414B21A8FA203001426BE /* ModelRecipes.swift */; };
 		623414B51A8FAA81001426BE /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623414B41A8FAA81001426BE /* RecipeCell.swift */; };
 		623414EB1A8FBAB8001426BE /* Recipe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 623414E91A8FBAB8001426BE /* Recipe.xcdatamodeld */; };
+		6259391F1AAC3C1C003E6AAB /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6259391E1AAC3C1C003E6AAB /* LocalAuthentication.framework */; };
 		6260AB861A99B0E6005D7A17 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 6260AB851A99B0E6005D7A17 /* location.png */; };
 		6260AB881A99B8FD005D7A17 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6260AB871A99B8FD005D7A17 /* MapKit.framework */; };
 		6287E0C81A9B60AF002E34FB /* MyDrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6287E0C71A9B60AF002E34FB /* MyDrawView.swift */; };
@@ -93,6 +94,9 @@
 		623414B21A8FA203001426BE /* ModelRecipes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelRecipes.swift; sourceTree = "<group>"; };
 		623414B41A8FAA81001426BE /* RecipeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
 		623414EA1A8FBAB8001426BE /* Recipe.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Recipe.xcdatamodel; sourceTree = "<group>"; };
+		6259391C1AAC35A6003E6AAB /* ka */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ka; path = ka.lproj/Main.strings; sourceTree = "<group>"; };
+		6259391D1AAC35A6003E6AAB /* ka */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ka; path = ka.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		6259391E1AAC3C1C003E6AAB /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		6260AB851A99B0E6005D7A17 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = location.png; path = Recipes/location.png; sourceTree = "<group>"; };
 		6260AB871A99B8FD005D7A17 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		6287E0C71A9B60AF002E34FB /* MyDrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDrawView.swift; sourceTree = "<group>"; };
@@ -114,6 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6259391F1AAC3C1C003E6AAB /* LocalAuthentication.framework in Frameworks */,
 				6224F89C1A9F4C7600BE6833 /* CoreGraphics.framework in Frameworks */,
 				6224F89A1A9F4C6E00BE6833 /* UIKit.framework in Frameworks */,
 				6224F8981A9F496000BE6833 /* QuartzCore.framework in Frameworks */,
@@ -163,6 +168,7 @@
 		623414841A8FA106001426BE = {
 			isa = PBXGroup;
 			children = (
+				6259391E1AAC3C1C003E6AAB /* LocalAuthentication.framework */,
 				6224F89B1A9F4C7600BE6833 /* CoreGraphics.framework */,
 				6224F8991A9F4C6E00BE6833 /* UIKit.framework */,
 				6260AB871A99B8FD005D7A17 /* MapKit.framework */,
@@ -398,6 +404,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				623414971A8FA106001426BE /* Base */,
+				6259391C1AAC35A6003E6AAB /* ka */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -406,6 +413,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6234149C1A8FA106001426BE /* Base */,
+				6259391D1AAC35A6003E6AAB /* ka */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";

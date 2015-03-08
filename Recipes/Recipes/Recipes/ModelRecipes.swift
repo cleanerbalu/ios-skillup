@@ -73,7 +73,7 @@ class ModelRecipes {
             if NSFileManager.defaultManager().removeItemAtPath(filePath, error: &error) {
                 //println("File removed \(filePath)")
             } else {
-                println("Error remove file: \(error!.localizedDescription)")
+                NSLog("Error remove file: \(error!.localizedDescription)")
             }
         }
     }
@@ -114,7 +114,6 @@ class ModelRecipes {
             _sortOrderAsc = newValue
             if let fRC = _fetchedResultsController {
                 fRC.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "shortDescr", ascending: _sortOrderAsc)]
-                println(fRC.fetchRequest.sortDescriptors!)
                 rerequest()
             }
         }
@@ -149,7 +148,6 @@ class ModelRecipes {
         
         //let sortDescriptors = [sortDescriptor]
         fetchRequest.sortDescriptors = [sortDescriptor]
-        
         
         fetchRequest.predicate = getPredicate()
         
