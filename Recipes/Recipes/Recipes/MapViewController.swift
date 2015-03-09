@@ -24,6 +24,7 @@ class MapViewController: UIViewController {
             annot.title = NSLocalizedString("Here did you the recipe",  comment: "Annotation explanation")
             
             mapView.addAnnotation(annot)
+            //mapView.mapType = MKMapType.
         }
     }
     
@@ -31,4 +32,16 @@ class MapViewController: UIViewController {
         self.navigationController?.toolbarHidden = true
     }
 
+    @IBAction func mapTypeChange(sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            mapView.mapType = MKMapType.Standard
+        case 1:
+            mapView.mapType = MKMapType.Satellite
+        case 2:
+            mapView.mapType = MKMapType.Hybrid
+        default:
+            break
+        }
+    }
 }
